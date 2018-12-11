@@ -196,7 +196,7 @@ Page({
         view: 2
       })
     };
-    that.getRecordList('UNRELEASE');
+    //that.getRecordList('UNRELEASE');
 
   },
 
