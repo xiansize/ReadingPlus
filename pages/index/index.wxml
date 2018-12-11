@@ -1,0 +1,22 @@
+<!--授权获取用户信息  -->
+<view class="container" wx:if="{{userInfo == null}}">
+  <open-data type="userAvatarUrl" class='user-avatar'></open-data>
+  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='userinfo'>点击获取昵称</button>
+  <view class="usermotto">进入朗读云+</view>
+</view>
+
+
+
+<!--欢迎页面内容  -->
+<view class='wrap' wx:if="{{userInfo != null}}">
+  <image class='wrap' src='/images/background/bg_welcome.png'></image>
+  <view class='container-logo'>
+    <view class='logo'>
+      <image src='/images/logo/logo_welcome.png' class='logo'></image>
+    </view>
+    <view class='container-title'>
+      <view class='title'>朗读云+</view>
+      <view class='slogan'>开启你的朗读之旅</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,61 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+  <view class='read' catchtap='toFreeRead'>
+    <view class='container-function'>
+      <view class='container-function-icon'>
+        <image class='function-icon' src='/images/icon/icon_free_read.png'></image>
+      </view>
+      <view class='container-function-text'>
+        <view class='function-title'>自由朗读</view>
+        <view class='function-text'>录制自定义内容朗读</view>
+      </view>
+
+    </view>
+    <image class='bg-function' src='/images/background/bg_free_read.png'></image>
+  </view>
+
+  <view class='container-category'>
+
+    <block wx:for="{{tList}}" wx:key="key" wx:for-item="item">
+
+      <view class='container-category-item' catchtap='clickCategoryItem' data-tid="{{item.typeId}}" data-name="{{item.typeName}}" data-path="{{item.img}}">
+        <view class='container-category-cover'>
+          <image class='category-cover' src='{{tPath}}{{item.img}}'></image>
+        </view>
+        <view class='category-title'>{{item.typeName}}</view>
+      </view>
+
+    </block>
+
+
+
+  </view>
+
+</view>
+
+
+<!-- 个人活动朗读作品 -->
+<!-- <view class='footer-mine' wx:if="{{haveRecord}}">
+  <view class='container-status'>{{status}}</view>
+  
+  <view class='container-search-item'>
+    <block wx:if="{{img != null}}">
+      <image class='container-article-cover' src='{{articlePath}}{{img}}'></image>
+    </block>
+    <block wx:else>
+      <image class='container-article-cover' src='/images/background/bg_view.png'></image>
+    </block>
+
+    <view class='container-article'>
+      <view class='container-article-title' catchtap='toListen'>{{rTitle != null ? rTitle : '自由朗读'}}</view>
+      <view class='container-article-author'>本人作品</view>
+    </view>
+    <view class='container-collect'>
+      <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
+      <view class='collect-number'>{{like}}</view>
+    </view>
+  </view>
+</view> -->

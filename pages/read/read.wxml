@@ -1,0 +1,97 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+
+  <view class='mine'>
+    <view class='mine-collect' catchtap='toReadCollect'>
+      <view class='mine-img-container'>
+        <image class='mine-img' src='/images/icon/icon_collect_read.png'></image>
+      </view>
+      <view class='mine-collect-text'>
+        我的收藏
+      </view>
+    </view>
+    <view class='mine-collect' catchtap='toReadMine'>
+      <view class='mine-img-container'>
+        <image class='mine-read-img' src='/images/icon/icon_myread_read.png'></image>
+      </view>
+      <view class='mine-collect-text'>
+        我的朗读
+      </view>
+    </view>
+  </view>
+
+  <view class='list' catchtap='toList'>
+    <view class='list-reader-title'>朗读排行榜</view>
+
+
+    <view class='container-avatar'>
+      <view class='container-champion'>
+        <image class='champion-img' src='/images/icon/icon_crown.png' wx:if="{{rank != null}}"></image>
+      </view>
+
+      <block wx:for="{{rank}}" wx:key="key">
+
+        <block wx:if="{{index == 0}}">
+
+          <view class='one-avatar avatar'>
+            <image class='one-img' src='{{item.profilePhoto}}'></image>
+          </view>
+
+        </block>
+        <block wx:if="{{index == 1}}">
+
+          <view class='two-avatar avatar'>
+            <image class='one-img' src='{{item.profilePhoto}}'></image>
+          </view>
+
+        </block>
+       <block wx:if="{{index == 2}}">
+          <view class='three-avatar avatar'>
+            <image class='one-img' src='{{item.profilePhoto}}'></image>
+          </view>
+
+        </block>
+      </block>
+    </view>
+
+    <view class='container-click-to'>
+      <image class='img-click-to' src='/images/icon/icon_to_read.png'></image>
+    </view>
+
+
+  </view>
+
+  <view class='read' catchtap='toArticleRead'>
+    <view class='container-function'>
+      <view class='container-function-icon'>
+        <image class='function-icon' src='/images/icon/icon_article_read.png'></image>
+      </view>
+      <view class='container-function-text'>
+        <view class='function-title'>美文朗读</view>
+        <view class='function-text'>选择美文开始朗读</view>
+      </view>
+
+    </view>
+    <image class='bg-function' src='/images/background/bg_article_read.png'></image>
+
+  </view>
+
+
+  <view class='read' catchtap='toFreeRead'>
+    <view class='container-function'>
+      <view class='container-function-icon'>
+        <image class='function-icon' src='/images/icon/icon_free_read.png'></image>
+      </view>
+      <view class='container-function-text'>
+        <view class='function-title'>自由朗读</view>
+        <view class='function-text'>录制自定义内容朗读</view>
+      </view>
+
+    </view>
+    <image class='bg-function' src='/images/background/bg_free_read.png'></image>
+  </view>
+
+</view>

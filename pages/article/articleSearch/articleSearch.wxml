@@ -1,0 +1,83 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<!-- <image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+
+
+  <!--输入搜索  -->
+  <view class='contaienr-input' wx:if="{{searchType == 1}}">
+    <view class='container-input-text'>
+      <image class='icon-search' src='/images/icon/icon_search.png'></image>
+      <input class='input-search-title' maxlength='15' focus='{{inputHidden}}' confirm-type='search' bindinput='inputListener' bindconfirm='inputSearch' value='{{inputTitle}}' placeholder='输入标题搜索美文' placeholder-class='input-hint'></input>
+      <image class='icon-clear' src='/images/icon/icon_clear.png' wx:if='{{showClear}}' catchtap='inputClear'></image>
+    </view>
+    <image class='bg-input' src='/images/background/bg_titlebar.png'></image>
+  </view>
+
+  <!--排行搜索  -->
+  <view class='list-search' wx:if="{{searchType == 2}}">
+    <view class='nav-views'>
+      <view class='nav-name' style="color:{{views == 1 ? '#6292FF' : '#999999'}}" catchtap='navToViews'>浏览量</view>
+      <view class='nav-item' wx:if="{{views == 1}}"></view>
+    </view>
+    <view class='nav-views'>
+      <view class='nav-name' style="color:{{views == 2 ? '#6292FF' : '#999999'}}" catchtap='navToNumbers'>参与人数</view>
+      <view class='nav-item' wx:if="{{views == 2}}"></view>
+    </view>
+    <view class='nav-views'>
+      <view class='nav-name' style="color:{{views == 3 ? '#6292FF' : '#999999'}}" catchtap='navToNews'>最新</view>
+      <view class='nav-item' wx:if="{{views == 3}}"></view>
+    </view>
+  </view>
+
+
+
+  <!--分类搜索  -->
+  <view class='list-search' wx:if="{{searchType == 3}}">
+    <scroll-view class="category-search" scroll-x="true">
+      <block wx:for="{{tList}}" wx:for-item="item" wx:key="key">
+        <view class="category-item" bindtap='categoryItem' data-id="{{index}}" data-tid="{{item.typeId}}" style="color:{{index == clickId ? '#6292ff' : '#999999'}}">{{item.typeName}}</view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!--其中一个分类  -->
+  <view class='list-search' wx:if="{{searchType == 0}}">
+    <image class='category-icon' src='{{tPath}}'></image>
+    <view class='category-name'>{{title}}</view>
+  </view>
+
+
+  <!--搜索结果  -->
+  <block wx:for="{{aList}}" wx:for-item="item" wx:for-index="idx" wx:key="key">
+    <view class='container-article' catchtap='clickToReadText' data-id="{{item.id}}">
+      <view class='container-number' wx:if="{{searchType == 2}}">
+        <view class='number' style="background-color:{{idx == 0 ? '#DAB273' : idx == 1 ? '#E9E9D8' : idx == 2 ? '#BA6E40' : '#FFFFFF'}} ">{{idx + 1}}</view>
+      </view>
+      <block wx:if="{{item.img != null}}">
+        <image class='cover-article' src='{{cPath}}{{item.img}}'></image>
+      </block>
+      <block wx:else>
+        <image class='cover-article' src='/images/background/bg_view.png'></image>
+      </block>
+      <view class='article'>
+        <view class='article-title'>{{item.titleName}}</view>
+        <view class='article-author'>{{item.author}}</view>
+      </view>
+    </view>
+  </block>
+
+
+  <!-- 加载等待 -->
+  <view class='loading-more' wx:if="{{more != null}}">{{more}}</view>
+
+
+
+
+
+
+
+</view>

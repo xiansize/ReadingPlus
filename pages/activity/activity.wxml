@@ -1,0 +1,56 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+
+<view class='wrap'>
+
+  <view class='search-out'>
+    <view class='container-search'>
+      <view class='container-search-img'>
+        <image class='search-img' src='/images/icon/icon_search.png'></image>
+      </view>
+      <input class='search-title' placeholder-style='hint-text'  value='{{sTitle}}' placeholder='搜索馆内活动'  maxlength='10' confirm-type='search' bindconfirm='searchActivity' focus='{{focus}}'></input>
+    </view>
+  </view>
+
+
+  <view class='back-all' wx:if="{{search}}" catchtap='backAll'>
+    《《 返回全部活动
+  </view>
+
+  <view class='banner' wx:if="{{search == false}}">
+    <swiper autoplay='true' indicator-dots='true' indicator-color='#FFFFFF' indicator-active-color='#6292FF' class='banner'>
+      <block wx:for="{{pList}}" wx:key='key'>
+        <swiper-item class='slide-image'>
+          <image src="{{aPath}}{{item.img}}" class='slide-image' data-aid='{{item.id}}' data-img='{{item.img}}' catchtap='clickToActivity' />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class='notice'>
+
+    <!--列表  -->
+    <block wx:for="{{aList}}" wx:key="key" wx:for-item="item">
+      <view class='notice-list' catchtap='clickToDetail' data-aid='{{item.id}}' data-img='{{item.img}}' data-t='{{item.activityType}}'>
+        <view class='notice-item'>
+          <view class='container-item-cover'>
+            <image class='item-cover' src='{{aPath}}{{item.img}}'></image>
+          </view>
+          <view class='container-item-text'>
+            <view class='item-title'>{{item.activityTitleName}}</view>
+            <view class='item-time'>{{item.stateTime}} ~ {{item.endTime}}</view>
+          </view>
+        </view>
+        <view class='border-item'></view>
+      </view>
+    </block>
+
+    <!-- 加载等待 -->
+    <view class='loading-more' wx:if="{{more != null}}">{{more}}</view>
+
+
+  </view>
+
+</view>

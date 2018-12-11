@@ -1,0 +1,38 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+  <image class='cover' src='{{cover}}'></image>
+
+  <view class='middle'>
+    <view class='activity-title'>{{aTitle}}</view>
+
+    <view class='container-msg'>
+      <image class='activity-icon' src='/images/icon/icon_location.png'></image>
+      <view class='activity-msg'>{{location}}</view>
+    </view>
+
+    <view class='container-msg'>
+      <image class='activity-icon' src='/images/icon/icon_date.png'></image>
+      <view class='activity-msg'>{{date}}</view>
+    </view>
+
+    <!-- <view class='container-msg'>
+      <image class='activity-icon' src='/images/icon/icon_time.png'></image>
+      <view class='activity-msg'>{{signIn}}{{time}}</view>
+    </view> -->
+  </view>
+
+  <view class='container-summary'>
+    <view class='container-summary-title'>
+      <image class='icon-summary' src='/images/icon/icon_summary.png'></image>
+      <view class='summary-title'>详情</view>
+    </view>
+    <view class='summary-text'>
+      <text>{{summary}}</text>
+    </view>
+
+  </view>
+
+</view>

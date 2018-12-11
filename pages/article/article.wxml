@@ -1,0 +1,90 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+
+  <view class='bg'>
+    <image class='bg-img' src='/images/background/bg_view.png'></image>
+  </view>
+
+  <view class='container-search' catchtap='clickToSearch'>
+    <view class='container-search-img'>
+      <image class='search-img' src='/images/icon/icon_search.png'></image>
+    </view>
+    <view class='search-hint'>输入标题搜索美文</view>
+  </view>
+
+  <view class='cotainer-title'>
+    <view class='container-text'>线上阅读</view>
+    <view class='container-slogan'>朗读云+ 您的读书助手</view>
+  </view>
+
+  <view class='container-category'>
+    <!--item 文章分类  -->
+    <block wx:for="{{tList}}" wx:for-item="item" wx:for-index="idx" wx:key="key">
+      <view class='container-category-item' catchtap='clickCategoryItem' data-tid="{{item.typeId}}" data-name="{{item.typeName}}" data-path="{{item.img}}">
+        <view class='container-category-cover'>
+          <block wx:if="{{item.img}}">
+            <image class='category-cover' src='{{tPath}}{{item.img}}'></image>
+          </block>
+          <block wx:else>
+            <image class='category-cover' src='/images/icon/icon_default_type.png'></image>
+          </block>
+        </view>
+        <view class='category-title'>{{item.typeName}}</view>
+      </view>
+    </block>
+
+
+
+
+    <view class='container-category-item' catchtap='clickToCategory' wx:if="{{more}}">
+      <view class='container-category-cover'>
+        <image class='category-cover' src='/images/icon/icon_category_more.png'></image>
+      </view>
+      <view class='category-title'>全部</view>
+    </view>
+
+  </view>
+
+
+
+  <view class='list'>
+    <view class='container-total-list' catchtap='clickToCharts'>
+      <view class='container-img'>
+        <image class='list-img' src='/images/icon/icon_list.png'></image>
+      </view>
+      <view class='list-title'>排行榜</view>
+      <view class='view-more'>查看更多</view>
+      <view class='to-click'>
+        <image class='to-img' src='/images/icon/icon_to_read.png'></image>
+      </view>
+    </view>
+
+    <view class='border'></view>
+
+    <view class='container-article-list'>
+
+      <block wx:for="{{aList}}" wx:for-item="item" wx:for-index="idx" wx:key="key">
+        <!-- 文章item -->
+        <view class='container-rank' catchtap='clickReadArt' data-id="{{item.id}}">
+          <view class='container-no'>
+            <image class='img-no' src='/images/icon/icon_no_{{idx + 1}}.png'></image>
+          </view>
+          <view class='container-article-cover'>
+            <block wx:if="{{item.img != null}}">
+              <image class='cover-article' src='{{cPath}}{{item.img}}'></image>
+            </block>
+            <block wx:else>
+              <image class='cover-article' src='/images/background/bg_view.png'></image>
+            </block>
+          </view>
+          <view class='article-title'>{{item.titleName}}</view>
+        </view>
+      </block>
+
+    </view>
+
+  </view>
+</view>

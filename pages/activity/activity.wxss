@@ -1,0 +1,151 @@
+@import "../../template/titlebar/titlebar.wxss";
+
+page {
+  background: #f5f5f9;
+  
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-top: 128rpx; */
+}
+
+.search-out {
+  width: 100%;
+  height: 104rpx;
+  background: #fff;
+}
+
+.container-search {
+  width: 92%;
+  height: 64rpx;
+  background: #f4f4f4;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 4rpx;
+  display: flex;
+  flex-direction: row;
+  margin-left: 4%;
+}
+
+.container-search-img {
+  width: 50rpx;
+  height: 64rpx;
+  text-align: center;
+  line-height: 64rpx;
+}
+
+.search-img {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.search-title {
+  width: 70%;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.hint-text{
+  color: #CCCCCC;
+  font-size: 20rpx;
+}
+
+.back-all{
+  width: 92%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #999999;
+}
+
+.banner {
+  width: 100%;
+  height: 230rpx;
+  margin-bottom: 20rpx;
+}
+
+.slide-image{
+  width: 100%;
+  height: 100%;
+}
+
+.notice {
+  width: 100%;
+  height: 100%;
+}
+
+.notice-list {
+  width: 100%;
+  height: 216rpx;
+  background: #fff;
+}
+
+.notice-item {
+  width: 96%;
+  height: 214rpx;
+  margin-left: 4%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item-cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 6rpx;
+}
+
+.border-item {
+  width: 96%;
+  height: 2rpx;
+  background: #ddd;
+  margin-left: 4%;
+}
+
+.container-item-cover {
+  width: 37%;
+  height: 156rpx;
+}
+
+.container-item-text {
+  width: 58%;
+  height: 156rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 4%;
+}
+
+.item-title {
+  width: 100%;
+  height: 88rpx;
+  font-size: 32rpx;
+  color: #222;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.item-time {
+  width: 100%;
+  height: 20%;
+  color: #999;
+  font-size: 26rpx;
+  margin-top: 8%;
+}
+
+.loading-more {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}

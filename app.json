@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/article/article",
+    "pages/article/articleSearch/articleSearch",
+    "pages/read/read",
+    "pages/read/readArticle/readArticle",
+    "pages/read/readMine/readMine",
+    "pages/read/readList/readList",
+    "pages/read/readCollect/readCollect",
+    "pages/activity/activity",
+    "pages/activity/activityDetail/activityDetail",
+    "pages/activity/activityRead/activityRead",
+    "pages/activity/activityWant/activityWant"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#6292FF",
+    "navigationBarTitleText": "图书馆",
+    "navigationBarTextStyle": "#FFFFFF"
+    
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#6292FF",
+    "borderStyle": "#DDDDDD",
+    "backgroundColor": "#F9F9F9",
+    "list": [
+      {
+        "pagePath": "pages/article/article",
+        "text": "美文",
+        "iconPath": "images/icon/icon_article_grey.png",
+        "selectedIconPath": "images/icon/icon_article.png"
+      },
+      {
+        "pagePath": "pages/read/read",
+        "text": "朗读",
+        "iconPath": "images/icon/icon_read_grey.png",
+        "selectedIconPath": "images/icon/icon_read.png"
+      },
+      {
+        "pagePath": "pages/activity/activity",
+        "text": "活动",
+        "iconPath": "images/icon/icon_activity_grey.png",
+        "selectedIconPath": "images/icon/icon_activity.png"
+      }
+    ]
+  }
+}

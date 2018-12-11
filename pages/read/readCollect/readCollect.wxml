@@ -1,0 +1,30 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+
+  <block wx:for="{{cList}}" wx:key="key" wx:for-item="item">
+    <view class='collect'>
+      <view class='collect-item'>
+        <block wx:if="{{item.articleImg}}">
+          <image class='cover' src="{{cPath}}{{item.articleImg}}"></image>
+        </block>
+        <block wx:else>
+          <image class='cover' src="/images/background/bg_view.png"></image>
+        </block>
+        <view class='article'>
+          <view class='article-title' catchtap='clickListen' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-rname='{{item.readerName}}'>{{item.titleName == null ? '自由朗读' : item.titleName}}</view>
+          <view class='article-author'>{{item.readerName}} 阅读</view>
+        </view>
+        <image class='collect-icon' src='{{item.cIcon}}' catchtap='cancelCollect' data-rid='{{item.opusId}}' data-icon="{{item.cIcon}}" data-index='{{index}}'></image>
+      </view>
+    </view>
+
+  </block>
+
+  <!-- 加载等待 -->
+  <view class='loading-more' wx:if="{{more != null}}">{{more}}</view>
+
+
+</view>

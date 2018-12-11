@@ -1,0 +1,39 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+
+
+  <view class='item mine' catchtap='clickMine'>
+    <image class='cover' src='{{avatar}}'></image>
+    <view class='name'>{{nickname}}</view>
+    <view class='container-number' style="background-color:{{rank == 1 ? '#DAB273' : rank == 2 ? '#E9E9D8' : rank == 3 ? '#BA6E40' : '#FFFFFF'}} ">{{rank}}</view>
+    <view class='container-collect'>
+      <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
+      <view class='collect-number'>{{collect}}</view>
+    </view>
+  </view>
+
+
+  <block wx:for="{{rList}}" wx:key="key" >
+
+    <view class='item' catchtap='clickReader' data-rid='{{item.id}}'>
+      <image class='cover' src='{{item.profilePhoto}}'></image>
+      <view class='name'>{{item.name}}</view>
+      <view class='container-number' style="background-color:{{item.ranking == 1 ? '#DAB273' : item.ranking == 2 ? '#E9E9D8' : item.ranking == 3 ? '#BA6E40' : '#FFFFFF'}} ">{{item.ranking}}</view>
+      <view class='container-collect'>
+        <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
+        <view class='collect-number'>{{item.opusCount}}</view>
+      </view>
+    </view>
+
+  </block>
+
+  <!-- 加载等待 -->
+  <view class='loading-more' wx:if="{{more != null}}">{{more}}</view>
+
+
+
+
+</view>

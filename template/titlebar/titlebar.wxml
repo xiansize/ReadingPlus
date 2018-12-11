@@ -1,0 +1,11 @@
+<template name="titleBar">
+
+  <view class='top' style="height: {{model}}rpx">
+    <view class='titlebar' style="top:{{model / 2 - 9}}rpx">
+      <!-- <image class='backpress' src='/images/icon/icon_backpress.png' wx:if="{{thisPress}}" catchtap='backpress'></image> -->
+      {{thisTitle}}
+    </view>
+    <image class='bg-titlebar' src='/images/background/bg_titlebar.png'></image>
+  </view>
+
+</template>

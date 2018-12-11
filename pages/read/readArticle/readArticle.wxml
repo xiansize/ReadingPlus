@@ -1,0 +1,209 @@
+<!-- <import src="../../../template/titlebar/titlebar.wxml" />
+<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
+<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
+<view class='wrap'>
+
+  <!--文章内容  -->
+  <view class='profile' wx:if="{{freeRead == false}}">
+    <image class='art-cover' src='{{aCover}}'></image>
+    <view class='art'>
+      <view class='title'>{{aTitle}}</view>
+      <view class='author'>文章著者：{{author}}</view>
+      <view class='author'>录入时间：{{pubTime}}</view>
+    </view>
+  </view>
+  <image class='bg-profile' src='/images/background/bg_view.png' wx:if="{{freeRead == false}}"></image>
+  <view class='text' wx:if="{{freeRead == false}}">
+    <text class='text-text' decode="{{true}}">{{text}}</text>
+  </view>
+
+  <!--自由朗读展示背景  -->
+  <image class='free-bg-count' src='/images/background/bg_titlebar.png' wx:if="{{freeRead}}"></image>
+  <image class='free-wave' src='/images/background/bg_wave.png' wx:if="{{freeRead}}"></image>
+  <image class='free-bg-wave' src='/images/background/bg_wave_black.png' wx:if="{{freeRead}}"></image>
+
+</view>
+
+
+
+<view class='container-record'>
+  <!--原文听  -->
+  <view class='play' wx:if="{{readType == 1}}">
+    <view class='container-progress' catchtap='playReaderRecord'>
+      <image class='play-reader-record' src='{{playIcon}}'></image>
+    </view>
+
+    <view class='play-reader-select' catchtap='selectReader'>
+      <view class='play-reader'>{{readerName}}</view>
+      <image class='play-reader-open' src='{{arrow}}' wx:if="{{readerName != '本人朗读' && aid == null && recordTime != '纯音频' && rankIn == null}}" ></image>
+    </view>
+
+    <view class='container-ope' wx:if="{{readerName != '本人朗读'}}" >
+      <image class='to-like' src="{{collect == 'IS' ? '/images/icon/icon_collect.png' : '/images/icon/icon_my_like.png'}}" catchtap='clickToCollectRecord' wx:if="{{rankIn != null}}"></image>
+      <image class='to-record' src='/images/icon/icon_to_record.png' catchtap='toReadyRecord' wx:if="{{rankIn == null}}"></image>
+    </view>
+
+    <view class='container-pg-play'>
+      <progress class='pg-play' backgroundColor='#535353' color='#6292FF' percent='{{playPercent}}'></progress>
+    </view>
+  </view>
+
+
+  <!--准备录制  -->
+  <view class='play' wx:if="{{readType == 2 && recordStatu == 0}}">
+    <view class='container-ready-side'>
+      <image class='back-listen' src='/images/icon/icon_backpress.png' wx:if="{{backArticle}}" catchtap='backToArticleRead'></image>
+    </view>
+    <view class='container-ready-record-start'>
+      <image class='ready-record-start-icon' src='/images/icon/icon_ready_record.png' catchtap='startRecord'></image>
+    </view>
+    <view class='container-ready-side' catchtap='readArtBackground'>
+      <image class='select-music' src='/images/icon/icon_select_music.png'></image>
+    </view>
+  </view>
+
+
+  <!--录制中  -->
+  <view class='play' wx:if="{{readType == 2 && (recordStatu == 1 || recordStatu == 2)}}">
+    <view class='recording-time'>{{recordTime}}</view>
+    <view class='container-recording-icon'>
+      <image class='recording-icon' src='{{recordIcon}}' catchtap='pauseRecord'></image>
+    </view>
+    <view class='recording-finish' catchtap='finishRecord'>完成</view>
+  </view>
+
+
+  <!--录制完成  -->
+  <view class='play' wx:if="{{readType == 2 && recordStatu == 3}}">
+    <view class='container-finish-time'>
+      <view class='container-finish-listen' catchtap='playRecord'>
+        <image class='finish-listen-icon' src='{{playIcon}}'></image>
+      </view>
+      <view class='finish-listen-time'>{{playRecord}}/{{recordTime}}</view>
+    </view>
+    <view class='container-finish-item' catchtap='restartRecord'>
+      <image class='finish-icon-ope' src='/images/icon/icon_record_retry.png'></image>
+      <view class='finish-text-ope'>重录</view>
+    </view>
+    <view class='container-finish-item' catchtap='saveRecord' wx:if="{{aid == null}}">
+      <image class='finish-icon-ope' src='/images/icon/icon_record_save.png'></image>
+      <view class='finish-text-ope'>保存</view>
+    </view>
+    <view class='container-finish-item' catchtap='publishRecord'>
+      <image class='finish-icon-ope' src='/images/icon/icon_record_publish.png'></image>
+      <view class='finish-text-ope'>发布</view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<!--选择其他读者  -->
+<view class='other-reader' wx:if="{{readType == 1 && selectReader}}" animation="{{animationData}}">
+  <view class='other-reader-title'>选择对象朗读</view>
+  <scroll-view scroll-y='true' class='scroller'>
+    <!-- <view class='other-reader-item'>
+      <view class='other-reader-name'>图书馆</view>
+      <image class='other-reader-play' src='/images/icon/icon_playing.png'></image>
+    </view> -->
+
+    <!-- item -->
+    <block wx:for="{{rList}}" wx:key="key">
+      <view class='other-reader-item'>
+        <view class='other-reader-item-e' catchtap='selectReaderListen' data-id='{{index}}' data-oid='{{item.opusId}}' data-rname='{{item.readerWeChatName}}' data-path='{{item.opusPath}}'>
+          <view class='other-reader-name' style="color:{{selectIndex == index ? '#6292FF' : '#FEFEFE'}}" >{{item.readerWeChatName}}</view>
+          <image class='other-reader-play' src='/images/icon/icon_playing.png' wx:if="{{selectIndex == index}}"></image>
+        </view>
+
+        <block wx:if="{{item.favorties == 'IS'}}">
+          <image class='to-like' src='/images/icon/icon_collect.png' wx:if="{{item.mySelf != 1}}" catchtap='cancelCollect' data-id='{{index}}' data-oid='{{item.opusId}}'></image>
+        </block>
+        <block wx:else>
+          <image class='to-like' src='/images/icon/icon_my_like.png' wx:if="{{item.mySelf != 1}}" catchtap='btnCollect'  data-id='{{index}}' data-oid='{{item.opusId}}' ></image>
+        </block>
+
+
+
+      </view>
+    </block>
+
+
+  </scroll-view>
+</view>
+
+
+<!--选择背景音乐  -->
+<view class='container-bg' wx:if="{{recordStatu == 0 && selectMusic}}" animation="{{animationData}}">
+
+  <view class='container-bg-title'>
+    <view class='contaienr-bg-out' catchtap='outSelectBg'>
+      <image class='bg-out' src='/images/icon/icon_fork.png'></image>
+    </view>
+    <view class='bg-title'>选择背景音乐</view>
+  </view>
+
+  <view class='container-bg-category-scroll'>
+    <scroll-view scroll-x="true" class='container-bg-category-scroller'>
+      <view class='bg-category-item' style="color:{{clickId ==-1 ? '#6292FF' : '#FEFEFE'}}" catchtap='clickNoBg'>无</view>
+      <block wx:for="{{bgTList}}" wx:for-item='item' wx:key='key'>
+        <view class='bg-category-item' catchtap='clickBackgroundType' data-tid='{{item.typeId}}' data-id='{{index}}' style="color:{{clickId == index ? '#6292FF' : '#FEFEFE'}}">{{item.typeName}}</view>
+      </block>
+    </scroll-view>
+  </view>
+
+
+  <scroll-view scroll-y="true" class='container-bg-name-srocll'>
+    <view class='container-bg-name-item' wx:if="{{clickId == -1}}">
+      <view class='bg-name-item' style="color:#6292FF">无</view>
+      <image class='bg-tick' src='/images/icon/icon_tick.png'></image>
+    </view>
+
+    <!-- item -->
+    <block wx:for="{{bList}}" wx:key="key" wx:for-item="item">
+      <view class='container-bg-name-item' catchtap='clickBackground' data-id='{{index}}' data-path='{{item.path}}'>
+        <view class='bg-name-item' style="color:#6292FF" style="color:{{clickBg == index ? '#6292FF' : '#FEFEFE'}}">{{item.name}}</view>
+        <image class='bg-tick' src='/images/icon/icon_tick.png' wx:if="{{clickBg == index}}"></image>
+      </view>
+    </block>
+
+  </scroll-view>
+
+</view>
+
+
+
+<!--自由朗读中间动画  -->
+<image class='free-bg-time free-top-time ' src='/images/background/bg_time.png' wx:if="{{freeRead}}"></image>
+<image class='free-bg-round free-top-time ' src='/images/background/bg_round.png' animation="{{animationRound}}" wx:if="{{freeRead && rotate}}"></image>
+<view class='free-record free-top-time ' wx:if="{{freeRead}}">{{recordTime}}</view>
+
+
+
+<!--发布弹窗确认  -->
+<view class='container-dialog-bg' wx:if="{{showDialog}}">
+  <view class='container-dialog'>
+    <view class='dialog-title'>请注意您的音频中不得含有：</view>
+    <view class='dialog-item'>1.违反国家法律、危害国家安全和统一、社会安定、公序良俗、社会公德以及侮辱的内容；</view>
+    <view class='dialog-item'>2.侵害他人名誉权、肖像权、知识产权、商业秘密等合法权利内容；</view>
+    <view class='dialog-item'>3.骚扰、广告信息及垃圾信息。</view>
+    <view class='container-dialog-confirm'>
+      <view class='dialog-cancel' catchtap='cancelPublish'>取消</view>
+      <view class='dialog-confirm' catchtap='confirmPublish'>确定并发布</view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 授权弹窗确认 -->
+<view class='container-dialog-bg' wx:if="{{authorizeConfirm}}">
+  <view class='container-authorize'>
+    <view class='authorize'>您还没授权录音,请授权</view>
+    <button class='btn-authorize' open-type='openSetting' bindopensetting='openSetting'>点击授权</button>
+  </view>
+</view>
+
+
+<!-- loading -->
+<loading wx:if="{{loading != null}}">{{loading}}</loading>
