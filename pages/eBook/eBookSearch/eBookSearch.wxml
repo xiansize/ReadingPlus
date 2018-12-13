@@ -1,0 +1,67 @@
+<view class='container-search'>
+
+  <!--弹窗  -->
+  <modal wx:if="{{showModal}}" confirm-text="去阅读" cancel-text="取消" bindcancel="cancelRead" bindconfirm="confirmRead" >
+
+    <view class='container-modal'>
+
+      <view class='container-search-value-modal'>
+
+
+        <view class='container-modal-img'>
+          <image class='modal-img' src='{{img}}'></image>
+        </view>
+        <view class='item-modal-text'>
+          <view class='item-modal-title'>《{{title}}》</view>
+          <view class='item-modal-text-detail'>作者：{{author}}</view>
+          <view class='item-modal-text-detail'>出版社：{{publisher}}</view>
+          <view class='item-modal-text-detail'>出版日期：{{pubdate}}</view>
+
+        </view>
+      </view>
+
+      <view class='container-br'>——————  简介  ——————</view>
+      <view class='container-summary'>
+        {{summary}}
+      </view>
+
+
+    </view>
+
+
+  </modal>
+
+
+
+  <view class='container-input'>
+    <view class='title-input-container'>
+      <input class='title-input' placeholder='关键字 搜索' confirm-type='search' bindconfirm="getTitle" focus="{{focuesInput}}" maxlength='10'></input>
+    </view>
+  </view>
+
+  <view class='container-search-value'>
+
+    <!--item  -->
+    <block wx:for="{{searchValue}}" wx:for-item="item" wx:key="key">
+      <view class='container-search-value-item' catchtap='getIsbn' data-id="{{item.id}}" data-img="{{item.image}}" data-title="{{item.title}}" data-author="{{item.author}}" data-isbn="{{item.isbn}}"  data-pubdate="{{item.pubdate}}" data-publisher="{{item.publisher}}" data-summary="{{item.summary}}">
+
+
+        <view class='container-item-img'>
+          <image class='item-img' src='{{rUrl}}/{{item.image}}'></image>
+        </view>
+        <view class='item-text'>
+          <view class='item-title'>《{{item.title}}》</view>
+          <view class='item-author'>作者：{{item.author}}</view>
+          <view class='item-type'>ISBN：{{item.isbn}}</view>
+
+        </view>
+      </view>
+
+    </block>
+    <view class='container-load' wx:if="{{isLoadMore}}">{{loadText}}</view>
+
+  </view>
+
+
+
+</view>

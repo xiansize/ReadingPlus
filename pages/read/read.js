@@ -96,6 +96,15 @@ Page({
   },
 
 
+  //线上电子书阅读
+  toEBook : function(){
+    wx.navigateTo({
+      url: '../eBook/eBookCategory/eBookCategory',
+    });
+
+  },
+
+
 
 
 

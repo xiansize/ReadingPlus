@@ -1,0 +1,62 @@
+Page {
+  background: #eee;
+}
+
+.container-ebook {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-search-btn {
+  width: 90%;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: white;
+  margin-top: 100rpx;
+  text-align: center;
+}
+
+.search-image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-left: 10rpx;
+}
+
+.search-text {
+  margin-left: 30rpx;
+  color: #888;
+}
+
+.container-resources-category {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 50rpx;
+}
+
+.container-category-item {
+  width: 27%;
+  height: 74rpx;
+  line-height: 74rpx;
+  text-align: center;
+  background: #999;
+  color: white;
+  border-radius: 40rpx;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 30rpx;
+  font-size: 34rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

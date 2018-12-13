@@ -80,5 +80,15 @@ App({
     //手机类型
     phoneModel : null,
 
+
+
+    //电子资源
+    eBookPath: "https://u.dataesb.com/ubook",
+    //uid与keycode
+    uid: 'test',
+    keyCode: 'test',
+    //电子资源文章接口token
+    rToken: null,
+
   }
 })

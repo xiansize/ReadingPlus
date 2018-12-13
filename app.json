@@ -11,7 +11,10 @@
     "pages/activity/activity",
     "pages/activity/activityDetail/activityDetail",
     "pages/activity/activityRead/activityRead",
-    "pages/activity/activityWant/activityWant"
+    "pages/activity/activityWant/activityWant",
+    "pages/eBook/eBookCategory/eBookCategory",
+    "pages/eBook/eBookSearch/eBookSearch",
+    "pages/eBook/eBookRead/eBookRead"
   ],
   "window": {
     "backgroundTextStyle": "light",

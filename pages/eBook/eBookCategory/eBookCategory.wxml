@@ -1,0 +1,28 @@
+<view class='container-ebook'>
+
+
+  <view class='container-search-btn' catchtap='toSearch'>
+    <view class='search-image'>
+      <image class='search-image' src='/images/icon/icon_search.png'></image>
+    </view>
+    <view class='search-text'>资源搜索</view>
+
+  </view>
+
+
+  <view class='container-resources-category'>
+
+    <block wx:for="{{categoryList}}" wx:for-item="item" wx:key="key" wx:for-index="idx">
+
+      <view class='container-category-item' catchtap='getCategoryCode' data-id='{{item.id}}' data-name='{{item.name}}' style="background-color:{{idx % 6 == 0 ? '#DB6968' : idx % 6 == 1 ? '#0067A6' : idx % 6 == 2  ? '#008972' :  idx % 6 == 3  ? '#F2B974' :  idx % 6 == 4  ? '#8A8CB2' :  '#F3B59B'  }}">{{item.name}}</view>
+
+    </block>
+
+
+
+  </view>
+
+
+
+
+</view>
