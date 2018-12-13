@@ -9,7 +9,7 @@
 
 
         <view class='container-modal-img'>
-          <image class='modal-img' src='{{img}}'></image>
+          <image class='modal-img' src='{{img}}' binderror='showDefaultImg' ></image>
         </view>
         <view class='item-modal-text'>
           <view class='item-modal-title'>《{{title}}》</view>
@@ -47,7 +47,7 @@
 
 
         <view class='container-item-img'>
-          <image class='item-img' src='{{rUrl}}/{{item.image}}'></image>
+          <image class='item-img' src='{{item.image}}' binderror='showDefaultImgList' data-index="{{index}}"></image>
         </view>
         <view class='item-text'>
           <view class='item-title'>《{{item.title}}》</view>

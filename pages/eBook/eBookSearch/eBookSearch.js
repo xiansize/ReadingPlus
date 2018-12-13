@@ -27,7 +27,7 @@ Page({
 
 
     //根url
-    rUrl: getApp().globalData.eBookPath,
+    rUrl: getApp().globalData.eBookPath + '/',
 
 
     //弹窗详情
@@ -45,6 +45,27 @@ Page({
 
 
 
+
+  },
+
+
+
+  //图片当张加载失败
+  showDefaultImg:function(e){
+    this.setData({
+      img: '/images/background/bg_view.png'
+    });
+
+  },
+
+
+  //图片列表加载失败
+  showDefaultImgList : function(e){
+    var index = e.currentTarget.dataset.index;
+    var img = 'searchValue[' + index + '].image';
+    this.setData({
+      [img]: '/images/background/bg_view.png'
+    }); 
 
   },
 
@@ -167,6 +188,7 @@ Page({
           var list = that.data.searchValue;
           //添加进去
           for (var i = 0; i < total.length; i++) {
+            total[i].image = that.data.rUrl + total[i].image;
             list.push(total[i]);
           };
           //分页加一
@@ -236,7 +258,9 @@ Page({
           var list = that.data.searchValue;
           //添加进去
           for (var i = 0; i < total.length; i++) {
+            total[i].image = that.data.rUrl + total[i].image;
             list.push(total[i]);
+            
           };
           //分页加一
           cPage++;
