@@ -96,7 +96,7 @@ Page({
 
   //点击获取书本详细信息
   getIsbn: function (e) {
-    var img = getApp().globalData.eBookPath + '/' + e.currentTarget.dataset.img;
+    var img =  e.currentTarget.dataset.img;
     var title = e.currentTarget.dataset.title;
     var author = e.currentTarget.dataset.author;
     var isbn = e.currentTarget.dataset.isbn;
