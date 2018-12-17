@@ -41,7 +41,7 @@ Page({
     pubdate: null,
     publisher: null,
     summary: null,
-
+    isListen : false,
 
 
 
@@ -85,7 +85,7 @@ Page({
 
     //资源搜索title
     wx.setNavigationBarTitle({
-      title: '阅读书籍',
+      title: '书籍搜索',
     });
 
     //搜索
@@ -121,6 +121,13 @@ Page({
       showModal: true,
     });
 
+
+    //获取接口是否可以听书
+    that.setData({
+      isListen: false,
+    })
+    that.getBookAudio(isbn);
+
   },
 
 
@@ -139,6 +146,20 @@ Page({
   },
 
 
+  //点击去听书
+  confirmListen:function(){
+    var that = this;
+    that.setData({
+      showModal: false,
+    });
+    //跳转电子书听
+    wx.navigateTo({
+      url: '../eBookListen/eBookListen?isbn=' + that.data.isbn,
+    });
+
+  },
+
+
 
   //取消弹窗
   cancelRead: function () {
@@ -146,6 +167,7 @@ Page({
     that.setData({
       showModal: false,
     });
+    
   },
 
 
@@ -289,6 +311,35 @@ Page({
 
       },
     });
+  },
+
+
+
+
+
+  //获取音频听书
+  getBookAudio : function(isbn){
+    var that = this;
+    //请求数据
+    var path = getApp().globalData.eBookPath + '/api/mp3/read.json?isbn=' + isbn;
+
+    wx.request({
+      url: path,
+      data: {
+      },
+      header: { "Content-Type": "application/json" },
+      success: function (res) {
+        console.log(res);
+        if(res.statusCode == 200 && res.data.code == 0){
+          that.setData({
+            isListen : true,
+          })
+        }
+        
+      }
+    })
+
+
   },
 
 

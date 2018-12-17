@@ -1,0 +1,18 @@
+<view class='container-eBookListen'>
+
+
+  <view class='container-player'>
+
+  </view>
+
+  <view class='top'></view>
+
+  <view class='container-list'>
+    <block wx:for="{{audioList}}">
+      <view>{{item.tit}}</view>
+    </block>
+  </view>
+
+
+
+</view>

@@ -95,18 +95,7 @@
   </view>
 
 
-   <view class='read' catchtap='toEBook'>
-    <view class='container-function'>
-      <view class='container-function-icon'>
-        <image class='function-icon' src='/images/icon/icon_eBook.png'></image>
-      </view>
-      <view class='container-function-text'>
-        <view class='function-title'>线上阅读</view>
-        <view class='function-text'>选择电子书进行阅读</view>
-      </view>
-
-    </view>
-  </view>
+  
 
  
 

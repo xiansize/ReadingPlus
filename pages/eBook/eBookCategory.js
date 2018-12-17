@@ -1,4 +1,4 @@
-var util = require('../../../utils/util.js');
+var util = require('../../utils/util.js');
 
 Page({
 
@@ -66,7 +66,7 @@ Page({
   //点击去搜素
   toSearch: function () {
     wx.navigateTo({
-      url: '../eBookSearch/eBookSearch',
+      url: '../eBook/eBookSearch/eBookSearch',
     })
   },
 
@@ -110,7 +110,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     var name = e.currentTarget.dataset.name;
     wx.navigateTo({
-      url: '../eBookSearch/eBookSearch?id=' + id + '&name=' + name,
+      url: '../eBook/eBookSearch/eBookSearch?id=' + id + '&name=' + name,
     })
 
   },

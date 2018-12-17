@@ -12,9 +12,10 @@
     "pages/activity/activityDetail/activityDetail",
     "pages/activity/activityRead/activityRead",
     "pages/activity/activityWant/activityWant",
-    "pages/eBook/eBookCategory/eBookCategory",
+    "pages/eBook/eBookCategory",
     "pages/eBook/eBookSearch/eBookSearch",
-    "pages/eBook/eBookRead/eBookRead"
+    "pages/eBook/eBookRead/eBookRead",
+    "pages/eBook/eBookListen/eBookListen"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,6 +41,12 @@
         "text": "朗读",
         "iconPath": "images/icon/icon_read_grey.png",
         "selectedIconPath": "images/icon/icon_read.png"
+      },
+      {
+        "pagePath": "pages/eBook/eBookCategory",
+        "text": "阅听",
+        "iconPath": "images/icon/icon_eBook_grey.png",
+        "selectedIconPath": "images/icon/icon_eBook.png"
       },
       {
         "pagePath": "pages/activity/activity",
