@@ -27,7 +27,7 @@ Page({
 
 
     //根url
-    rUrl: getApp().globalData.eBookPath + '/',
+    rUrl: getApp().globalData.eBookListenPath + '/',
 
 
     //弹窗详情

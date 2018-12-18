@@ -8,22 +8,48 @@ page {
   align-items: center;
 }
 
-.container-player{
+.container-player {
   position: fixed;
   z-index: 100;
   width: 100%;
-  height: 100rpx;
-  background: #FFFFFF;
-  top:0rpx;
-
+  height: 130rpx;
+  background: #535353;
+  bottom: 0rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.container-list{
+.container-list {
   width: 100%;
-  
 }
 
-.top{
+.bottom {
   width: 100%;
-  height: 100rpx;
+  height: 130rpx;
+}
+
+.container-item {
+  width: 100%;
+  height: 88rpx;
+  background: #BDA67E;
+ 
+}
+
+.item {
+  width: 96%;
+  height: 88rpx;
+  line-height: 88rpx;
+  color: #fefefe;
+  margin-left: 4%;
+  font-size: 26rpx;
+  overflow: hidden;
+  border-bottom: solid 1rpx #535353;
+}
+
+
+.icon-play{
+  width: 42rpx;
+  height: 42rpx;
+  margin-left: 20rpx;
 }

@@ -1,16 +1,21 @@
 <view class='container-eBookListen'>
 
-
-  <view class='container-player'>
-
+  <!-- 播放列表 -->
+  <view class='container-list'>
+    <block wx:for="{{audioList}}" wx:key='key'>
+      <view class='container-item' catchtap='playAudio' data-path='{{item.voi}}' data-voi='{{item.tit}}'>
+        <view class='item'>{{item.tit}}</view>
+      </view>
+    </block>
+    <view class='bottom' wx:if="{{isShowPlay}}"></view>
   </view>
 
-  <view class='top'></view>
 
-  <view class='container-list'>
-    <block wx:for="{{audioList}}">
-      <view>{{item.tit}}</view>
-    </block>
+  <!-- 播放控制器 -->
+  <view class='container-player' wx:if="{{isShowPlay}}">
+    <image class='icon-play' src='{{playIcon}}' catchtap='btnPlay'></image>
+    <view class='item'>{{cTitle}}</view>
+
   </view>
 
 

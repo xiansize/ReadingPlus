@@ -1,5 +1,6 @@
 {
   "pages": [
+   
     "pages/index/index",
     "pages/article/article",
     "pages/article/articleSearch/articleSearch",
@@ -14,8 +15,9 @@
     "pages/activity/activityWant/activityWant",
     "pages/eBook/eBookCategory",
     "pages/eBook/eBookSearch/eBookSearch",
-    "pages/eBook/eBookRead/eBookRead",
-    "pages/eBook/eBookListen/eBookListen"
+    "pages/eBook/eBookListen/eBookListen",
+    "pages/eBook/eBookRead/eBookRead"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

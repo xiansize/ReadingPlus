@@ -84,6 +84,8 @@ App({
 
     //电子资源
     eBookPath: "https://u.dataesb.com/ubook",
+    //听书地址及书本封面地址
+    eBookListenPath: "http://www.cpgebook.com",
     //uid与keycode
     uid: 'test',
     keyCode: 'test',
