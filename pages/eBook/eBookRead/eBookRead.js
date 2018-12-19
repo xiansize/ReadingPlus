@@ -25,9 +25,13 @@ Page({
     var id = options.id
     var url = "https://ebook.3eol.com.cn/database/webreader/Index?id=" + id + "&resid=15"
 
+    console.log(url);
+
     this.setData({
       readUrl: url,
     });
+
+    
 
 
 
@@ -62,19 +66,6 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
+  
 
 })

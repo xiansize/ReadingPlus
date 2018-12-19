@@ -19,5 +19,11 @@
   </view>
 
 
+  <!-- 图书封面 -->
+  <!-- <image src='{{iPath}}' class='book-cover'></image> -->
+
+
+
+
 
 </view>

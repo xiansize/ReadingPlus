@@ -24,6 +24,7 @@ Page({
     isbn: '',
     author: '',
     summary: '',
+    iPath: '/images/icon/icon_disk.png',
 
 
 
@@ -79,6 +80,13 @@ Page({
   },
 
 
+  //截取书本封面信息
+  getCover: function(c) {
+    var covers = c.split('');
+
+  },
+
+
 
   //点击item播放
   playAudio: function(e) {
@@ -124,7 +132,7 @@ Page({
 
     }
 
-  
+
 
 
 
@@ -145,8 +153,8 @@ Page({
         isbn: isbn
       });
       this.getBookAudio(isbn);
-    }else{
-      
+    } else {
+
 
       //扫普通二维码进入
       var data = decodeURIComponent(options.q);

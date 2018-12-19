@@ -1,6 +1,5 @@
 {
   "pages": [
-   
     "pages/index/index",
     "pages/article/article",
     "pages/article/articleSearch/articleSearch",
@@ -17,14 +16,12 @@
     "pages/eBook/eBookSearch/eBookSearch",
     "pages/eBook/eBookListen/eBookListen",
     "pages/eBook/eBookRead/eBookRead"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#6292FF",
     "navigationBarTitleText": "图书馆",
     "navigationBarTextStyle": "#FFFFFF"
-    
   },
   "tabBar": {
     "color": "#999999",
