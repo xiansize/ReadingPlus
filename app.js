@@ -78,7 +78,7 @@ App({
 
 
     //手机类型
-    phoneModel : null,
+    phoneModel: null,
 
 
 
@@ -94,3 +94,12 @@ App({
 
   }
 })
+
+
+//放在app.json中添加电子书功能的。
+// {
+//   "pagePath": "pages/eBook/eBookCategory",
+//   "text": "阅听",
+//   "iconPath": "images/icon/icon_eBook_grey.png",
+//   "selectedIconPath": "images/icon/icon_eBook.png"
+// },
