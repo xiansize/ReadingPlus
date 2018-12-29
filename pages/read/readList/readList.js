@@ -51,8 +51,8 @@ Page({
       url: appData.urlPath + '/sys/reader',
       data: {
         token: appData.token,
-        page: 1,
-        limit: 20,
+        page: that.data.cPage,
+        limit: 999,
         orderBy: 'OPUS_COUNT_DESC',
 
       },
