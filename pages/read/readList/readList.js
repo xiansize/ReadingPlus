@@ -52,7 +52,7 @@ Page({
       data: {
         token: appData.token,
         page: that.data.cPage,
-        limit: 999,
+        limit: 20,
         orderBy: 'OPUS_COUNT_DESC',
 
       },
