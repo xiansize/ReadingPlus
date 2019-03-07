@@ -18,12 +18,12 @@
     <view class='container-views' wx:if="{{view == 1}}">
       <view class='container-likes right'>
         <view class='likes likes-name'>{{likes}}</view>
-        <view class='likes'>获赞数</view>
+        <view class='likes'>获赞数量</view>
 
       </view>
       <view class='container-likes left'>
         <view class='likes likes-name'>{{numbers}}</view>
-        <view class='likes'>参与者</view>
+        <view class='likes'>参与作品</view>
       </view>
 
     </view>

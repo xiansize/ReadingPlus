@@ -21,12 +21,12 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#6292FF",
     "navigationBarTitleText": "图书馆",
-    "navigationBarTextStyle": "#FFFFFF"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999999",
     "selectedColor": "#6292FF",
-    "borderStyle": "#DDDDDD",
+    "borderStyle": "white",
     "backgroundColor": "#F9F9F9",
     "list": [
       {

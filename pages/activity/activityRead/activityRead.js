@@ -274,7 +274,7 @@ Page({
             date: time,
             detail: res.data.data.synopsis,
             likes: res.data.data.pollCount,
-            numbers: res.data.data.gameCount,
+            
           });
 
         }else{
@@ -324,6 +324,7 @@ Page({
             rList: list,
             more: null,
             cPage: c,
+            numbers: res.data.count == null ? 0 : res.data.count,
           });
         } else {
           that.setData({
