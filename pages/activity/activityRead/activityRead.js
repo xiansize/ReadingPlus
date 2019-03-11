@@ -129,6 +129,7 @@ Page({
         type: "LIBRATY",
         titleName: that.data.sTitle,
         activityId: that.data.aid,
+        orderByClause: 'POLL_COUNT_DESC',
       },
       success: function(res) {
         console.log(res.data);
@@ -302,6 +303,7 @@ Page({
         type : "LIBRATY",
         limit: 10,
         activityId: that.data.aid,
+        orderByClause: 'POLL_COUNT_DESC',
       },
       success: function(res) {
         console.log(res.data);
