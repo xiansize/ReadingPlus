@@ -71,13 +71,10 @@ Page({
               //保存token 和 openId
               app.globalData.token = res.data.data.token;
 
-
               //3,跳转
-              setTimeout(function () {
-                wx.switchTab({
-                  url: '../article/article',
-                })
-              }.bind(this), 0.5 * 1000);
+              wx.switchTab({
+                url: '../article/article',
+              });
 
             }else{
 
@@ -85,11 +82,7 @@ Page({
                 icon : 'none',
                 title: res.data.msg,
               });
-
             }
-
-           
-
           },
           fail: function() {
             wx.showToast({
@@ -124,7 +117,6 @@ Page({
 
       var code = wx.getStorageSync('code');
       if (code == null || code == '') {
-        //getApp().globalData.libCode = "interlibtest"; //
         wx.showToast({
           icon: 'none',
           title: '进入万升馆',
@@ -137,7 +129,15 @@ Page({
 
 
 
+  },
 
+
+
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
 
     //获取用户信息
     if (app.globalData.userInfo) {
@@ -146,17 +146,6 @@ Page({
         hasUserInfo: true,
       });
     } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      // app.userInfoReadyCallback = res => {
-      //   if (res != null) {
-         
-      //   } else {
-         
-      //   }
-      // };
-
-
       wx.getSetting({
         success: res => {
           if (res.authSetting['scope.userInfo']) {
@@ -197,15 +186,6 @@ Page({
         }
       });
     }
-  },
-
-
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
 
   },
 })

@@ -60,6 +60,7 @@ Page({
         id: that.data.aid,
       },
       success: function(res) {
+        console.log(res);
         that.setData({
           tList: res.data.data
         });

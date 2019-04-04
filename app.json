@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/activity/activtyShare/activityShare",
     "pages/index/index",
     "pages/article/article",
     "pages/article/articleSearch/articleSearch",
@@ -20,7 +21,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#6292FF",
-    "navigationBarTitleText": "图书馆",
+    "navigationBarTitleText": "朗读云+",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -41,7 +42,6 @@
         "iconPath": "images/icon/icon_read_grey.png",
         "selectedIconPath": "images/icon/icon_read.png"
       },
-     
       {
         "pagePath": "pages/activity/activity",
         "text": "活动",

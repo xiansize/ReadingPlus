@@ -45,9 +45,9 @@ page {
 }
 
 .name{
-  width: 30%;
-  height: 36rpx;
-  line-height: 36rpx;
+  width: 46%;
+  height: 42rpx;
+  line-height: 42rpx;
   font-size: 30rpx;
   color: #222222;
 }
@@ -59,7 +59,8 @@ page {
   line-height:52rpx;
   max-width: 100rpx;
   min-width: 52rpx;
-  margin: 100rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
   text-align: center;
   background: #E5E5E5;
   border-radius: 52rpx;

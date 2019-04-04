@@ -1,0 +1,40 @@
+<view class='container-activityShare'>
+
+  <!-- 文章信息 -->
+  <scroll-view scroll-y class='container-bg-text-srocll'>
+    <view class='container-text' style="background-image: url('/images/background/bg_titlebar.png'); background-size: cover">
+      <view class='article-title'>{{aTitle}}</view>
+      <view class='article-author'>{{author}}</view>
+      <text class='article-text' decode="{{true}}">{{text}}</text>
+    </view>
+  </scroll-view>
+
+  <!-- 读者信息 -->
+  <view class='container-reader'>
+    <image class='avatar' src='/images/background/bg_titlebar.png'></image>
+    <view class='reader-name'>{{rName}}</view>
+  </view>
+
+
+  <!-- 音频播放 -->
+  <view class='play'>
+    <progress class='pg-play' backgroundColor='#dedede' color='#6292FF' percent='{{playPercent}}'></progress>
+    <view class='container-play-time'>
+      <view class='play-time'>{{playTime}}</view>
+      <view class='play-total'>{{playTotal}}</view>
+    </view>
+    <view class='container-ope'>
+      <view class='ranking'></view>
+      <view class='btn-play'></view>
+      <view class='btn-vote'></view>
+    </view>
+  </view>
+
+
+  <!-- 活动作品排行 -->
+  <view></view>
+
+
+
+
+</view>

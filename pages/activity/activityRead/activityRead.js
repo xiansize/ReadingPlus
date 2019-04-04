@@ -13,15 +13,15 @@ Page({
     //活动海报
     cover: null,
     //活动标题
-    aTitle: null,
+    aTitle: '',
     //活动日期
-    date: null,
+    date: '',
     //获赞数量
     likes: 0,
     //人数
     numbers: 0,
     //详情
-    detail: null,
+    detail: '',
 
     //1：详情  2：参与音频
     view: 1,
@@ -43,7 +43,7 @@ Page({
     //more
     more: null,
 
-    //当前第几页
+    //当前第几页  
     cPage: 1,
 
     //搜索title
@@ -55,6 +55,14 @@ Page({
 
     //文章搜索
     search: false,
+
+    //活动期间
+    during: false,
+
+
+    //手机号
+    phone: null,
+    inputPhone : false,
 
 
 
@@ -77,9 +85,8 @@ Page({
     if (that.data.view == 2) {
       that.setData({
         view: 1,
-      })
+      });
     }
-
   },
 
 
@@ -91,7 +98,7 @@ Page({
     if (that.data.view == 1) {
       that.setData({
         view: 2,
-      })
+      });
     }
   },
 
@@ -110,11 +117,89 @@ Page({
         rList: [],
       });
       that.searchList();
-
-
     };
-
   },
+
+
+  
+
+
+
+
+  //点击输入手机号确定
+  btnPhone : function(e){
+    var that = this;
+    if(that.data.phone != null && that.data.phone.length == 11){
+      that.postPhone();
+
+    }else{
+      wx.showToast({
+        icon : 'none',
+        title: '请输入正确手机号',
+      });
+    }
+  },
+
+
+  //监听输入手机号码
+  inputPhone : function(e){
+    var value = e.detail.value
+    this.setData({
+      phone : value,
+    });
+  },
+
+
+
+
+  //获取token跳转到功能页面
+  getToken: function() {
+
+    //1,获取openId
+    var path = appData.urlPath;
+    wx.login({
+      success: function(res) {
+        //2,获取token
+        wx.request({
+          url: path + '/sys/wechat/login',
+          data: {
+            appid: 'wxd693763b0943bfad',
+            secret: 'a0dee35d93a9c7e613581448231b8bb6',
+            js_code: res.code,
+            grant_type: 'authorization_code',
+            libId: appData.libCode,
+          },
+          method: "POST",
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success: function(res) {
+            console.log(res);
+
+            if (res.data.code == 0) {
+              //保存token 和 openId
+              appData.token = res.data.data.token;
+
+            } else {
+
+              wx.showToast({
+                icon: 'none',
+                title: res.data.msg,
+              });
+            }
+          },
+          fail: function() {
+            wx.showToast({
+              icon: 'none',
+              title: '连接服务器失败',
+            })
+          },
+        });
+
+      }
+    })
+  },
+
 
   //搜索接口
   searchList: function() {
@@ -167,9 +252,7 @@ Page({
   //点击进行活动朗读
   wantToRead: function() {
     var that = this;
-    wx.navigateTo({
-      url: '../activityWant/activityWant?aid=' + that.data.aid,
-    });
+    that.getReaderInfo(0);
   },
 
 
@@ -180,40 +263,109 @@ Page({
     var index = e.currentTarget.dataset.id;
     var rid = e.currentTarget.dataset.rid;
 
-    that.requestLike(rid,index);
+    that.requestLike(rid, index);
 
   },
 
 
-  //投票接口
-  requestLike: function(id,index) {
+
+  //获取用户信息，查看是否有手机号。如果没有，添加手机号
+  getReaderInfo: function(rid) {
+
     var that = this;
     wx.request({
-      url: appData.urlPath + '/sys/opus/'+id+'/pull',
+      url: appData.urlPath + '/sys/reader/' + rid + '/opus',
       data: {
         token: appData.token,
-        opusId : id
+        rdId: rid,
+        opusStart: 'RELEASE',
+        start: 2,
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.data.data.phone) {
+          //有手机号码
+          wx.navigateTo({
+            url: '../activityWant/activityWant?aid=' + that.data.aid,
+          });
+        } else {
+          //没有手机号码
+          that.setData({
+            inputPhone : true,
+          });
+
+        }
+      },
+    });
+  },
+
+
+
+  //提交手机号码
+  postPhone: function () {
+    var that = this;
+    var path = appData.urlPath;
+
+    wx.request({
+      url: path + '/sys/reader/wechat/small-program',
+      data: {
+        token: appData.token,
+        name: appData.userInfo.nickName,
+        phone: that.data.phone,
+      },
+      method: "PUT",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+
+        //提交手机号码成功
+        console.log(res);
+        if(res.data.code == 0){
+          that.setData({
+            inputPhone: false,
+          });
+          wx.navigateTo({
+            url: '../activityWant/activityWant?aid=' + that.data.aid,
+          });
+        }
+      },
+    });
+
+
+  },
+
+
+
+  //投票接口
+  requestLike: function(id, index) {
+    var that = this;
+    wx.request({
+      url: appData.urlPath + '/sys/opus/' + id + '/pull',
+      data: {
+        token: appData.token,
+        opusId: id
       },
       method: "POST",
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res);
-        if(res.data.code == 0){
+        if (res.data.code == 0) {
           var list = that.data.rList;
           list[index].pollCount++;
           that.setData({
-            rList : list
+            rList: list
           });
 
           wx.showToast({
             title: '投票成功',
           });
 
-        }else{
+        } else {
           wx.showToast({
-            icon : 'none',
+            icon: 'none',
             title: res.data.msg,
           });
         }
@@ -244,7 +396,7 @@ Page({
         url: '../../read/readArticle/readArticle?free=' + 1 +
           '&path=' + path +
           '&name=' + reader + ' 朗读' +
-          '&aid='+ that.data.aid,
+          '&aid=' + that.data.aid,
       });
     };
 
@@ -264,7 +416,7 @@ Page({
       },
       success: function(res) {
         console.log(res);
-        if(res.data.code == 0){
+        if (res.data.code == 0) {
 
           var time = util.formatTimeD(new Date(res.data.data.stateTime)) + ' ~ ' + util.formatTimeD(new Date(res.data.data.endTime));
 
@@ -275,12 +427,22 @@ Page({
             date: time,
             detail: res.data.data.synopsis,
             likes: res.data.data.pollCount,
-            
+
           });
 
-        }else{
+
+          //活动截止日期
+          if (new Date() <= res.data.data.endTime) {
+            that.setData({
+              during: true,
+            });
+          }
+
+
+
+        } else {
           wx.showToast({
-            icon : 'none',
+            icon: 'none',
             title: res.data.msg,
           });
         }
@@ -300,7 +462,7 @@ Page({
       data: {
         token: appData.token,
         page: that.data.cPage,
-        type : "LIBRATY",
+        type: "LIBRATY",
         limit: 10,
         activityId: that.data.aid,
         orderByClause: 'POLL_COUNT_DESC',
@@ -374,6 +536,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    //获取token
+    this.getToken();
 
   },
 
@@ -381,6 +545,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+
 
   },
 
@@ -420,6 +585,29 @@ Page({
 
 
   },
+
+
+  /**
+   * 页面分享
+   */
+  onShareAppMessage: function(res) {
+    var that = this;
+    //获取馆代码
+    var lid = appData.libCode;
+    var aTitle = that.data.aTitle;
+    return {
+      title: aTitle,
+      path: 'pages/activity/activityRead/activityRead?code=' + lid,
+      imageUrl: that.data.cover, //用户分享出去的自定义图片大小为5:4,
+      success: function(res) {
+
+      },
+      fail: function(res) {
+
+      },
+    }
+
+  }
 
 
 })
