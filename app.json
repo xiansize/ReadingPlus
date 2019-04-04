@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/activity/activtyShare/activityShare",
+   
     "pages/index/index",
     "pages/article/article",
     "pages/article/articleSearch/articleSearch",
@@ -13,6 +13,7 @@
     "pages/activity/activityDetail/activityDetail",
     "pages/activity/activityRead/activityRead",
     "pages/activity/activityWant/activityWant",
+    "pages/activity/activtyShare/activityShare",
     "pages/eBook/eBookCategory",
     "pages/eBook/eBookSearch/eBookSearch",
     "pages/eBook/eBookListen/eBookListen",
