@@ -40,6 +40,9 @@ Page({
     //活动全部音频
     rList: [],
 
+    //活动个人音频作品
+    mList : [],
+
     //more
     more: null,
 
@@ -104,6 +107,7 @@ Page({
 
 
 
+
   //点击搜索获取输入文字
   toSearch: function(e) {
     var that = this;
@@ -122,7 +126,25 @@ Page({
 
 
   
-
+  //点击去看个人投票
+  btnReaderShare : function(e){
+    var that = this;
+    var aid = that.data.aid;
+    var vote = e.currentTarget.dataset.vote;
+    var ranking = e.currentTarget.dataset.ranking;
+    var apath = e.currentTarget.dataset.apath;
+    var rid = e.currentTarget.dataset.rid;
+    var atitle = e.currentTarget.dataset.atitle == null ? '自由朗读':e.currentTarget.dataset.atitle;
+    wx.navigateTo({
+      url: '../../activity/activtyShare/activityShare?aid='+aid
+      +'&vote='+ vote 
+      +'&ranking=' + ranking
+      +'&apath=' + apath
+      +'&rid=' + rid
+      +'&atitle=' + atitle
+      ,
+    });
+  },
 
 
 
@@ -150,55 +172,35 @@ Page({
   },
 
 
-
-
-  //获取token跳转到功能页面
-  getToken: function() {
-
-    //1,获取openId
-    var path = appData.urlPath;
-    wx.login({
-      success: function(res) {
-        //2,获取token
-        wx.request({
-          url: path + '/sys/wechat/login',
-          data: {
-            appid: 'wxd693763b0943bfad',
-            secret: 'a0dee35d93a9c7e613581448231b8bb6',
-            js_code: res.code,
-            grant_type: 'authorization_code',
-            libId: appData.libCode,
-          },
-          method: "POST",
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          success: function(res) {
-            console.log(res);
-
-            if (res.data.code == 0) {
-              //保存token 和 openId
-              appData.token = res.data.data.token;
-
-            } else {
-
-              wx.showToast({
-                icon: 'none',
-                title: res.data.msg,
-              });
-            }
-          },
-          fail: function() {
-            wx.showToast({
-              icon: 'none',
-              title: '连接服务器失败',
-            })
-          },
+  //获取个人活动作品
+  getPersonalRecord: function () {
+    var that = this;
+    wx.request({
+      url: appData.urlPath + '/sys/opus',
+      data: {
+        token: appData.token,
+        type: 'PERSONAGE',
+        page: 1,
+        limit: 99,
+        activityId: that.data.aid,
+        //opusStart: 'RELEASE',
+      },
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          mList : res.data.data
         });
+        
+      },
+    });
 
-      }
-    })
+
   },
+
+
+
+
+ 
 
 
   //搜索接口
@@ -529,6 +531,7 @@ Page({
 
     this.getDetail(aid);
     this.getRList();
+    this.getPersonalRecord();
 
   },
 
@@ -536,8 +539,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    //获取token
-    this.getToken();
+   
 
   },
 
@@ -590,24 +592,21 @@ Page({
   /**
    * 页面分享
    */
-  onShareAppMessage: function(res) {
-    var that = this;
-    //获取馆代码
-    var lid = appData.libCode;
-    var aTitle = that.data.aTitle;
-    return {
-      title: aTitle,
-      path: 'pages/activity/activityRead/activityRead?code=' + lid,
-      imageUrl: that.data.cover, //用户分享出去的自定义图片大小为5:4,
-      success: function(res) {
-
-      },
-      fail: function(res) {
-
-      },
-    }
-
-  }
+  // onShareAppMessage: function(res) {
+  //   var that = this;
+  //   //获取馆代码
+  //   var lid = appData.libCode;
+  //   var aTitle = that.data.aTitle;
+  //   return {
+  //     title: aTitle,
+  //     path: 'pages/activity/activityRead/activityRead?code=' + lid,
+  //     imageUrl: that.data.cover, //用户分享出去的自定义图片大小为5:4,
+  //     success: function(res) {
+  //     },
+  //     fail: function(res) {
+  //     },
+  //   }
+  // }
 
 
 })

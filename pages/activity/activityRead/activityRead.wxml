@@ -12,7 +12,7 @@
     <view class='container-msg'>
       <image class='activity-icon' src='/images/icon/icon_date.png'></image>
       <view class='activity-msg'>{{date}}</view>
-      <button class='activity-share' open-type="share" hover-class='none'>分享</button>
+      <!-- <button class='activity-share' open-type="share" hover-class='none'>分享</button> -->
     </view>
 
     <view class='container-views' wx:if="{{view == 1}}">
@@ -51,17 +51,27 @@
     <view class='contaienr-back' catchtap='toGetAllRecord' wx:if="{{search}}">《《 返回全部音频</view>
 
     <!-- 本人阅读 -->
-    <view class='container-search-item'>
-      <image class='container-article-cover' src='/images/background/bg_view.png'></image>
-      <view class='container-article'>
-        <view class='container-article-title'>知是清晨来</view>
-        <view class='container-article-author'>本人朗读</view>
+    <block wx:for="{{mList}}" wx:key="key">
+      <view class='container-search-item' data-apath='{{item.opusPath}}' data-rid='{{item.opusId}}' data-ranking='{{item.ranking}}' data-vote='{{item.collectionCount}}' data-atitle='{{item.titleName}}' catchtap='btnReaderShare'>
+         <block wx:if="{{item.articleImg != null}}">
+          <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
+        </block>
+        <block wx:else>
+          <image class='container-article-cover' src='/images/background/bg_view.png'></image>
+        </block>
+        <view class='container-article'>
+          <view class='container-article-title'>{{item.titleName == null ? '自由朗读': item.titleName}}</view>
+          <view class='container-article-author'>本人朗读</view>
+        </view>
+        <view class='container-collect'>
+          <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
+          <view class='collect-number'>{{item.collectionCount}}</view>
+        </view>
       </view>
-      <view class='container-collect'>
-        <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
-        <view class='collect-number'>1</view>
-      </view>
-    </view>
+    </block>
+
+
+
     <view class='border'></view>
 
     <!-- 全部音频 -->
@@ -93,11 +103,11 @@
 
 
 <!-- 弹窗输入手机号 -->
-<view class='container-readerinfo' wx:if="{{inputPhone}}" >
+<view class='container-readerinfo' wx:if="{{inputPhone}}">
   <view class='container-input-phone'>
     <view class='input-tips'>请输入手机号码参加活动：</view>
     <view class='input-phone'>
-      <input maxlength='11' bindinput="inputPhone" type='number' ></input>
+      <input maxlength='11' bindinput="inputPhone" type='number'></input>
     </view>
     <view class='btn-phone' catchtap='btnPhone'>确定</view>
   </view>

@@ -11,43 +11,13 @@
 .container-text {
   width: 100%;
   height: 330rpx;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
+  background: #6292FF; */
 }
 
-.container-bg-text-srocll {
-  width: 100%;
-  height: 330rpx;
-}
 
-.article-title {
-  width: 100%;
-  height: 48rpx;
-  text-align: center;
-  font-size: 42rpx;
-  color: #efefef;
-  margin-top: 10rpx;
-}
-
-.article-author {
-  width: 100%;
-  height: 30rpx;
-  text-align: center;
-  font-size: 28rpx;
-  color: #efefef;
-  margin-top: 20rpx;
-  margin-bottom: 10rpx;
-}
-
-.article-text {
-  width: 100%;
-  height: 100%;
-  font-size: 32rpx;
-  letter-spacing: 4rpx;
-  line-height: 50rpx;
-  color: #efefef;
-}
 
 /* 读者信息 */
 
@@ -67,13 +37,24 @@
 }
 
 .reader-name {
-  width: 80%;
+  width: 70%;
   height: 120rpx;
   line-height: 120rpx;
   font-size: 36rpx;
   color: #666;
   margin-left: 2%;
   overflow: hidden;
+}
+
+.reader-share{
+  width: 20%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 36rpx;
+  color: #ffffff;
+  background: #6292FF;
+  text-align: center;
+  border-radius: 10rpx;
 }
 
 /* 音频播放 */
@@ -113,3 +94,111 @@
   font-size: 24rpx;
   color: #888;
 }
+
+.container-ope{
+  width: 96%;
+  height: 150rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+.ranking{
+  width: 41%;
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ranking-item{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #888;
+  text-align: center;
+  font-size: 46rpx;
+  margin-bottom: 2rpx;
+}
+
+.ranking-icon{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+
+
+.btn-play{
+  width: 18%;
+  height: 110rpx;
+  line-height: 124rpx;
+  background: #6292FF;
+  text-align: center;
+  border-radius: 6rpx;
+}
+
+.btn-play-icon{
+  width:40rpx;
+  height: 40rpx;
+}
+
+.title-list{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-top: solid #ededed 2rpx;
+  border-bottom: solid #ededed 2rpx;
+  margin-top: 10rpx;
+  font-size: 36rpx;
+  
+}
+
+.list-item{
+  width: 100%;
+  height: 130rpx;
+  border-bottom: solid #ededed 2rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-item-icon{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  margin-left: 4rpx;
+}
+
+.list-item-title{
+  width: 66%;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 4rpx;
+}
+
+.list-item-article{
+  width: 100%;
+  height: 60rpx;
+  font-size: 34rpx;
+  overflow: hidden;
+}
+
+.list-item-reader{
+  width: 100%;
+  height: 40rpx;
+  font-size: 30rpx;
+  color: #888;
+  overflow: hidden;
+}
+
+.list-vote{
+  width: 13%;
+  height: 130rpx;
+  line-height: 130rpx;
+  font-size: 32rpx;
+  color: #888;
+}
+
+
