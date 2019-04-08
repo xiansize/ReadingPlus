@@ -51,8 +51,9 @@
     <view class='contaienr-back' catchtap='toGetAllRecord' wx:if="{{search}}">《《 返回全部音频</view>
 
     <!-- 本人阅读 -->
+    <view class='title-record'>个人作品</view>
     <block wx:for="{{mList}}" wx:key="key">
-      <view class='container-search-item' data-apath='{{item.opusPath}}' data-rid='{{item.opusId}}' data-ranking='{{item.ranking}}' data-vote='{{item.collectionCount}}' data-atitle='{{item.titleName}}' catchtap='btnReaderShare'>
+      <view class='container-search-item' data-apath='{{item.opusPath}}' data-rid='{{item.opusId}}' data-ranking='{{item.ranking}}' data-vote='{{item.pollCount}}' data-atitle='{{item.titleName}}' catchtap='btnReaderShare'>
          <block wx:if="{{item.articleImg != null}}">
           <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
         </block>
@@ -65,7 +66,7 @@
         </view>
         <view class='container-collect'>
           <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
-          <view class='collect-number'>{{item.collectionCount}}</view>
+          <view class='collect-number'>{{item.pollCount}}</view>
         </view>
       </view>
     </block>
@@ -75,6 +76,7 @@
     <view class='border'></view>
 
     <!-- 全部音频 -->
+    <view class='title-record'>全部作品</view>
     <block wx:for="{{rList}}" wx:key="key">
       <view class='container-search-item'>
         <block wx:if="{{item.articleImg != null}}">

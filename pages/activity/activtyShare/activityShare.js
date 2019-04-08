@@ -246,6 +246,12 @@ Page({
               that.getRList();
 
 
+              //隐藏loading
+              that.setData({
+                loading: null,
+              });
+
+
 
             } else {
 
@@ -436,6 +442,11 @@ Page({
       wx.setStorageSync('code', code);
 
     }
+
+    //显示loading
+    this.setData({
+      loading : '加载一下',
+    });
 
     this.getToken();
 

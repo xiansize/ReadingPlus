@@ -420,6 +420,7 @@ Page({
       switch (sType) {
         case '0':
           tTitle = options.name;
+          
           that.setData({
             tId: options.id,
             tPath: options.path,

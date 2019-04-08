@@ -46,7 +46,13 @@
 
   <!--其中一个分类  -->
   <view class='list-search' wx:if="{{searchType == 0}}">
-    <image class='category-icon' src='{{tPath}}'></image>
+    <block wx:if="{{tPath}}">
+      <image class='category-icon' src='{{tPath}}'></image>
+    </block>
+    <block wx:else>
+      <image class='category-icon' src='/images/icon/icon_default_type.png'></image>
+    </block>
+
     <view class='category-name'>{{title}}</view>
   </view>
 

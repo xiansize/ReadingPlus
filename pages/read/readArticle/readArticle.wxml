@@ -41,7 +41,7 @@
 
     <view class='container-ope' wx:if="{{readerName != '本人朗读'}}" >
       <image class='to-like' src="{{collect == 'IS' ? '/images/icon/icon_collect.png' : '/images/icon/icon_my_like.png'}}" catchtap='clickToCollectRecord' wx:if="{{rankIn != null}}"></image>
-      <image class='to-record' src='/images/icon/icon_to_record.png' catchtap='toReadyRecord' wx:if="{{rankIn == null}}"></image>
+      <image class='to-record' src='/images/icon/icon_to_record.png' catchtap='toReadyRecord' wx:if="{{rankIn == null && aid == null}}"></image>
     </view>
 
     <view class='container-pg-play'>

@@ -85,12 +85,26 @@ Page({
     var name = e.currentTarget.dataset.name;
     var path = e.currentTarget.dataset.path;
 
-    wx.navigateTo({
-      url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-        '&name=' + name +
-        '&path=' + this.data.tPath + path +
-        '&aid=' + this.data.aid,
-    });
+
+    if (path != null) {
+
+      wx.navigateTo({
+        url: '../../article/articleSearch/articleSearch?type=0&id=' + id
+          + '&name=' + name
+          + '&path=' + this.data.tPath + path,
+      });
+
+
+
+    } else {
+
+      wx.navigateTo({
+        url: '../../article/articleSearch/articleSearch?type=0&id=' + id
+          + '&name=' + name
+          + '&path=/images/icon/icon_default_type.png',
+      });
+
+    }
 
   },
 
@@ -177,7 +191,7 @@ Page({
       aid: options.aid,
     });
     this.getTList();
-    this.getPersonalRecord();
+    //this.getPersonalRecord();
 
   },
 
