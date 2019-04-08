@@ -183,7 +183,7 @@ Page({
         page: 1,
         limit: 99,
         activityId: that.data.aid,
-        //opusStart: 'RELEASE',
+        opusStart: 'RELEASE',
       },
       success: function (res) {
         console.log(res);
