@@ -295,6 +295,29 @@ Page({
   },
 
 
+
+  //通过作品id获取信息
+  getRecordInfo: function() {
+    wx.request({
+      url: appData.urlPath + '/sys/opus/key/'+145,
+      data: {
+        token: appData.token,
+        //id: 145,
+      },
+      success: function (res) {
+        console.log(res); 
+      },
+      fail: function () {
+        wx.showToast({
+          icon: 'none',
+          title: '连接服务器失败',
+        })
+      },
+    });
+
+  },
+
+
   //获取用户信息
   getReaderInfo: function(rid) {
 
@@ -413,6 +436,8 @@ Page({
    */
   onLoad: function(options) {
 
+    this.getRecordInfo();
+
     this.setData({
       aid: options.aid,
       vote: options.vote,
@@ -428,7 +453,7 @@ Page({
         title: options.atitle
       });
     }
-   
+
 
 
 
@@ -445,7 +470,7 @@ Page({
 
     //显示loading
     this.setData({
-      loading : '加载一下',
+      loading: '加载一下',
     });
 
     this.getToken();
