@@ -27,8 +27,8 @@ Page({
     readerName: null,
     like: null,
     img: null,
-    path : null,
-    articleId : null,
+    path: null,
+    articleId: null,
 
     //活动是否上传了作品
     haveRecord: false,
@@ -81,6 +81,7 @@ Page({
 
   //点击其中分类
   clickCategoryItem: function(e) {
+    var that = this
     var id = e.currentTarget.dataset.tid;
     var name = e.currentTarget.dataset.name;
     var path = e.currentTarget.dataset.path;
@@ -89,9 +90,10 @@ Page({
     if (path != null) {
 
       wx.navigateTo({
-        url: '../../article/articleSearch/articleSearch?type=0&id=' + id
-          + '&name=' + name
-          + '&path=' + this.data.tPath + path,
+        url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
+          '&name=' + name +
+          '&path=' + this.data.tPath + path +
+          '&aid=' + that.data.aid,
       });
 
 
@@ -99,9 +101,10 @@ Page({
     } else {
 
       wx.navigateTo({
-        url: '../../article/articleSearch/articleSearch?type=0&id=' + id
-          + '&name=' + name
-          + '&path=/images/icon/icon_default_type.png',
+        url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
+          '&name=' + name +
+          '&path=/images/icon/icon_default_type.png' +
+          '&aid=' + that.data.aid,
       });
 
     }
@@ -159,8 +162,8 @@ Page({
     var that = this;
     var aid = that.data.articleId;
     var path = that.data.path;
-    
-   
+
+
 
     if (aid != null) {
       wx.navigateTo({

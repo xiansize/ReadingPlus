@@ -178,6 +178,7 @@ Page({
   clickToReadText: function(e) {
     var that = this;
     //活动的情况
+   
     if (that.data.aid != null) {
       var id = e.currentTarget.dataset.id;
       wx.navigateTo({
@@ -410,6 +411,7 @@ Page({
         aid: options.aid,
       });
     };
+
 
 
     //没有活动的时候

@@ -73,19 +73,18 @@ page {
 }
 
 .activity-msg {
-  width: 74%;
+  width: 70%;
   height: 100%;
   color: #999;
   font-size: 30rpx;
 }
 
-.activity-share {
-  width: 16%;
+.activity-timeup {
+  width: 20%;
   height: 40rpx;
   line-height: 40rpx;
   font-size: 24rpx;
-  color: #fff;
-  background: #6292ff;
+  color: red;
   border-radius: 10rpx;
   text-align: center;
 }

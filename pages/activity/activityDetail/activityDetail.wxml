@@ -16,6 +16,7 @@
     <view class='container-msg'>
       <image class='activity-icon' src='/images/icon/icon_date.png'></image>
       <view class='activity-msg'>{{date}}</view>
+      <view class='activity-timeup' wx:if="{{timeup}}">活动已结束</view>
     </view>
 
     <!-- <view class='container-msg'>
@@ -30,7 +31,7 @@
       <view class='summary-title'>详情</view>
     </view>
     <view class='summary-text'>
-      <text>{{summary}}</text>
+      <text decode='true'>{{summary}}</text>
     </view>
 
   </view>

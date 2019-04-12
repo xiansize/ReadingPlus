@@ -1013,6 +1013,7 @@ Page({
 
           if (that.data.aid != null) {
             if (that.data.freeRead) {
+              
               rData = {
                 token: app.globalData.token,
                 activityId: that.data.aid,
@@ -1020,6 +1021,7 @@ Page({
                 opusStart: pub == 0 ? 'NOT_AUDIT' : 'UNREVIEWED',
               }
             } else {
+              
               rData = {
                 token: app.globalData.token,
                 activityId: that.data.aid,
@@ -1057,6 +1059,8 @@ Page({
               "Content-Type": "application/x-www-form-urlencoded"
             },
             success: function(res) {
+
+              console.log(res);
 
               if (res.data.code == 0) {
 

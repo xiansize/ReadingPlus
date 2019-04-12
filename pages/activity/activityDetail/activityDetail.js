@@ -29,6 +29,9 @@ Page({
     //文章封面根地址
     aPath: appData.urlPath + '/upload/poster/',
 
+    //活动过期
+    timeup: false,
+
   },
 
 
@@ -70,6 +73,13 @@ Page({
           date: time,
           summary: res.data.data.synopsis,
         });
+
+        //活动截至日期
+        if (new Date() >= res.data.data.endTime) {
+          that.setData({
+            timeup: true,
+          });
+        }
 
       },
     });

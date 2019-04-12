@@ -41,7 +41,7 @@ Page({
     rList: [],
 
     //活动个人音频作品
-    mList : [],
+    mList: [],
 
     //more
     more: null,
@@ -65,7 +65,10 @@ Page({
 
     //手机号
     phone: null,
-    inputPhone : false,
+    inputPhone: false,
+
+    //活动过期
+    timeup: false,
 
 
 
@@ -125,38 +128,37 @@ Page({
   },
 
 
-  
+
   //点击去看个人投票
-  btnReaderShare : function(e){
+  btnReaderShare: function(e) {
     var that = this;
     var aid = that.data.aid;
     var vote = e.currentTarget.dataset.vote;
     var ranking = e.currentTarget.dataset.ranking;
     var apath = e.currentTarget.dataset.apath;
     var rid = e.currentTarget.dataset.rid;
-    var atitle = e.currentTarget.dataset.atitle == null ? '自由朗读':e.currentTarget.dataset.atitle;
+    var atitle = e.currentTarget.dataset.atitle == null ? '自由朗读' : e.currentTarget.dataset.atitle;
     wx.navigateTo({
-      url: '../../activity/activtyShare/activityShare?aid='+aid
-      +'&vote='+ vote 
-      +'&ranking=' + ranking
-      +'&apath=' + apath
-      +'&rid=' + rid
-      +'&atitle=' + atitle
-      ,
+      url: '../../activity/activtyShare/activityShare?aid=' + aid +
+        '&vote=' + vote +
+        '&ranking=' + ranking +
+        '&apath=' + apath +
+        '&rid=' + rid +
+        '&atitle=' + atitle,
     });
   },
 
 
 
   //点击输入手机号确定
-  btnPhone : function(e){
+  btnPhone: function(e) {
     var that = this;
-    if(that.data.phone != null && that.data.phone.length == 11){
+    if (that.data.phone != null && that.data.phone.length == 11) {
       that.postPhone();
 
-    }else{
+    } else {
       wx.showToast({
-        icon : 'none',
+        icon: 'none',
         title: '请输入正确手机号',
       });
     }
@@ -164,16 +166,16 @@ Page({
 
 
   //监听输入手机号码
-  inputPhone : function(e){
+  inputPhone: function(e) {
     var value = e.detail.value
     this.setData({
-      phone : value,
+      phone: value,
     });
   },
 
 
   //获取个人活动作品
-  getPersonalRecord: function () {
+  getPersonalRecord: function() {
     var that = this;
     wx.request({
       url: appData.urlPath + '/sys/opus',
@@ -185,12 +187,12 @@ Page({
         activityId: that.data.aid,
         opusStart: 'RELEASE',
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         that.setData({
-          mList : res.data.data
+          mList: res.data.data
         });
-        
+
       },
     });
 
@@ -200,7 +202,7 @@ Page({
 
 
 
- 
+
 
 
   //搜索接口
@@ -293,7 +295,7 @@ Page({
         } else {
           //没有手机号码
           that.setData({
-            inputPhone : true,
+            inputPhone: true,
           });
 
         }
@@ -304,7 +306,7 @@ Page({
 
 
   //提交手机号码
-  postPhone: function () {
+  postPhone: function() {
     var that = this;
     var path = appData.urlPath;
 
@@ -319,11 +321,11 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
 
         //提交手机号码成功
         console.log(res);
-        if(res.data.code == 0){
+        if (res.data.code == 0) {
           that.setData({
             inputPhone: false,
           });
@@ -433,10 +435,18 @@ Page({
           });
 
 
-          //活动截止日期
-          if (new Date() <= res.data.data.endTime) {
+          //朗读截止日期
+          if (new Date() <= res.data.data.contestEndTime) {
             that.setData({
               during: true,
+            });
+          }
+
+
+          //活动截至日期
+          if (new Date() >= res.data.data.endTime) {
+            that.setData({
+              timeup: true,
             });
           }
 
@@ -539,7 +549,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-   
+
 
   },
 

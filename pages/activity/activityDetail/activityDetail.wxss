@@ -61,7 +61,7 @@ page {
 }
 
 .activity-msg {
-  width: 90%;
+  width: 70%;
   height: 100%;
   color: #999999;
   font-size: 30rpx;
@@ -105,4 +105,15 @@ page {
   color: #666;
   line-height: 40rpx;
   letter-spacing: 2rpx;
+}
+
+
+.activity-timeup {
+  width: 20%;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  color: red;
+  border-radius: 10rpx;
+  text-align: center;
 }

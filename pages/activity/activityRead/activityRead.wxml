@@ -12,7 +12,7 @@
     <view class='container-msg'>
       <image class='activity-icon' src='/images/icon/icon_date.png'></image>
       <view class='activity-msg'>{{date}}</view>
-      <!-- <button class='activity-share' open-type="share" hover-class='none'>分享</button> -->
+      <view class='activity-timeup' wx:if="{{timeup}}">活动已结束</view>
     </view>
 
     <view class='container-views' wx:if="{{view == 1}}">
@@ -39,7 +39,7 @@
   </view>
 
   <view class='container-detail' wx:if="{{view == 1}}">
-    <view class='detail'>{{detail}}</view>
+    <text class='detail' decode='true'>{{detail}}</text>
   </view>
 
   <view class='search' wx:if="{{view == 2}}">
