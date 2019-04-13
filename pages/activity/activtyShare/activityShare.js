@@ -8,6 +8,9 @@ Page({
    */
   data: {
 
+    //作品id
+    recordId : null,
+
     //活动id
     aid: null,
     //活动封面根地址
@@ -205,9 +208,11 @@ Page({
 
 
   //点击查看其他读者
-  btnOtherReader: function() {
+  btnOtherReader: function(e) {
+    // var that = this;
+    // var rid = e.currentTarget.dataset.rid;
     // wx.navigateTo({
-    //   url: '../../activity/activtyShare/activityShare',
+    //   url: '../../activity/activtyShare/activityShare?rid='+rid,
     // });
   },
 
@@ -241,17 +246,12 @@ Page({
               appData.token = res.data.data.token;
 
               //获取其它信息
-              that.getDetail(that.data.aid);
-              that.getReaderInfo(0);
-              that.getRList();
-
+              that.getRecordInfo();
 
               //隐藏loading
               that.setData({
                 loading: null,
               });
-
-
 
             } else {
 
@@ -298,16 +298,54 @@ Page({
 
   //通过作品id获取信息
   getRecordInfo: function() {
+    var that = this;
     wx.request({
-      url: appData.urlPath + '/sys/opus/key/'+145,
+      url: appData.urlPath + '/sys/opus/key/' + that.data.rid,
       data: {
         token: appData.token,
         //id: 145,
       },
-      success: function (res) {
-        console.log(res); 
+      success: function(res) {
+        console.log(res);
+        if (res.data.code == 0) {
+          var cover = that.data.aPath + res.data.data.activityImg;
+          that.setData({
+            cover: cover,
+            avatar: res.data.data.readerWeChatprofilePhoto,
+            rName: res.data.data.readerWeChatName,
+            ranking: res.data.data.ranking,
+            vote: res.data.data.pollCount,
+            aid : res.data.data.activityId,
+            rPath: res.data.data.opusPath,
+            aTitle: res.data.data.titleName != null ? res.data.data.titleName : '自由朗读'
+          });
+
+
+          //显示文章名
+          if(res.data.data.titleName){
+            wx.setNavigationBarTitle({
+              title: res.data.data.titleName
+            });
+          }else{
+            wx.setNavigationBarTitle({
+              title: "自由朗读"
+            });
+          }
+
+
+          //获取活动所有作品
+          that.getRList();
+          
+
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '',
+          })
+        }
+
       },
-      fail: function () {
+      fail: function() {
         wx.showToast({
           icon: 'none',
           title: '连接服务器失败',
@@ -318,29 +356,7 @@ Page({
   },
 
 
-  //获取用户信息
-  getReaderInfo: function(rid) {
-
-    var that = this;
-    wx.request({
-      url: appData.urlPath + '/sys/reader/' + rid + '/opus',
-      data: {
-        token: appData.token,
-        rdId: rid,
-        opusStart: 'RELEASE',
-        start: 2,
-      },
-      success: function(res) {
-        console.log(res);
-        that.setData({
-          avatar: res.data.data.profilePhoto,
-          rName: res.data.data.name,
-
-        });
-      },
-    });
-  },
-
+ 
 
   //活动全部音频
   getRList: function() {
@@ -435,29 +451,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
-    this.getRecordInfo();
-
     this.setData({
-      aid: options.aid,
-      vote: options.vote,
-      ranking: options.ranking,
-      rPath: options.apath,
       rid: options.rid,
-      aTitle: options.atitle,
     });
-
-
-    if (options.atitle != null) {
-      wx.setNavigationBarTitle({
-        title: options.atitle
-      });
-    }
-
-
-
-
-
     //获取馆代码
     var code = options.code;
     if (code != null) {
@@ -465,14 +461,12 @@ Page({
       getApp().globalData.libCode = code;
       //缓存
       wx.setStorageSync('code', code);
-
     }
-
     //显示loading
     this.setData({
       loading: '加载一下',
     });
-
+    //获取token
     this.getToken();
 
 
@@ -531,16 +525,10 @@ Page({
     var that = this;
     //获取馆代码
     var lid = appData.libCode;
-    var aTitle = that.data.aTitle;
     return {
-      title: aTitle,
+      title: that.data.aTitle,
       path: 'pages/activity/activtyShare/activityShare?code=' + lid +
-        '&aid=' + that.data.aid +
-        '&vote=' + that.data.vote +
-        '&ranking=' + that.data.ranking +
-        '&apath=' + that.data.rPath +
-        '&rid=' + that.data.rid +
-        '&atitle=' + that.data.aTitle,
+        '&rid=' + that.data.rid,
       //imageUrl: that.data.cover, //用户分享出去的自定义图片大小为5:4,
       success: function(res) {
 

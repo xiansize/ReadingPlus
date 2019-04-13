@@ -125,12 +125,13 @@
 .ranking-icon{
   width: 30rpx;
   height: 30rpx;
+  margin-right: 1%;
 }
 
 
 
 .btn-play{
-  width: 18%;
+  width: 16%;
   height: 110rpx;
   line-height: 124rpx;
   background: #6292FF;
@@ -167,15 +168,16 @@
   width: 100rpx;
   height: 100rpx;
   border-radius: 8rpx;
-  margin-left: 4rpx;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .list-item-title{
-  width: 66%;
+  width: 72%;
   height: 100rpx;
   display: flex;
   flex-direction: column;
-  margin-left: 4rpx;
+  
 }
 
 .list-item-article{

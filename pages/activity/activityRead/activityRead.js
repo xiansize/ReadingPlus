@@ -132,19 +132,9 @@ Page({
   //点击去看个人投票
   btnReaderShare: function(e) {
     var that = this;
-    var aid = that.data.aid;
-    var vote = e.currentTarget.dataset.vote;
-    var ranking = e.currentTarget.dataset.ranking;
-    var apath = e.currentTarget.dataset.apath;
     var rid = e.currentTarget.dataset.rid;
-    var atitle = e.currentTarget.dataset.atitle == null ? '自由朗读' : e.currentTarget.dataset.atitle;
     wx.navigateTo({
-      url: '../../activity/activtyShare/activityShare?aid=' + aid +
-        '&vote=' + vote +
-        '&ranking=' + ranking +
-        '&apath=' + apath +
-        '&rid=' + rid +
-        '&atitle=' + atitle,
+      url: '../../activity/activtyShare/activityShare?rid=' + rid 
     });
   },
 
@@ -541,7 +531,7 @@ Page({
 
     this.getDetail(aid);
     this.getRList();
-    this.getPersonalRecord();
+   
 
   },
 
@@ -557,6 +547,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.getPersonalRecord();
 
 
   },

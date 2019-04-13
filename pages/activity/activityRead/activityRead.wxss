@@ -284,7 +284,7 @@ page {
 .icon-collect {
   width: 30rpx;
   height: 30rpx;
-  margin-left: 20rpx;
+  
 }
 
 .border {

@@ -53,7 +53,7 @@
     <!-- 本人阅读 -->
     <view class='title-record'>个人作品</view>
     <block wx:for="{{mList}}" wx:key="key">
-      <view class='container-search-item' data-apath='{{item.opusPath}}' data-rid='{{item.opusId}}' data-ranking='{{item.ranking}}' data-vote='{{item.pollCount}}' data-atitle='{{item.titleName}}' catchtap='btnReaderShare'>
+      <view class='container-search-item'  data-rid='{{item.opusId}}'  catchtap='btnReaderShare'>
          <block wx:if="{{item.articleImg != null}}">
           <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
         </block>
