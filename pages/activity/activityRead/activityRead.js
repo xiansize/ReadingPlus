@@ -184,6 +184,9 @@ Page({
         });
 
       },
+      complete:function(){
+        wx.stopPullDownRefresh();
+      },
     });
 
 
@@ -398,14 +401,14 @@ Page({
 
 
   //活动详情
-  getDetail: function(aid) {
+  getDetail: function() {
     var that = this;
 
     wx.request({
-      url: appData.urlPath + '/sys/activity-main/' + aid,
+      url: appData.urlPath + '/sys/activity-main/' + that.data.aid,
       data: {
         token: appData.token,
-        id: aid,
+        id: that.data.aid,
         analysis: 1,
       },
       success: function(res) {
@@ -465,7 +468,7 @@ Page({
         token: appData.token,
         page: that.data.cPage,
         type: "LIBRATY",
-        limit: 10,
+        limit: 20,
         activityId: that.data.aid,
         orderByClause: 'POLL_COUNT_DESC',
       },
@@ -514,8 +517,13 @@ Page({
       rList: [],
     });
     that.getRList();
+    that.getPersonalRecord();
+    that.getDetail();
 
   },
+
+
+ 
 
 
   /**
@@ -529,7 +537,7 @@ Page({
       aid: aid,
     });
 
-    this.getDetail(aid);
+    this.getDetail();
     this.getRList();
    
 
@@ -590,24 +598,11 @@ Page({
   },
 
 
-  /**
-   * 页面分享
-   */
-  // onShareAppMessage: function(res) {
-  //   var that = this;
-  //   //获取馆代码
-  //   var lid = appData.libCode;
-  //   var aTitle = that.data.aTitle;
-  //   return {
-  //     title: aTitle,
-  //     path: 'pages/activity/activityRead/activityRead?code=' + lid,
-  //     imageUrl: that.data.cover, //用户分享出去的自定义图片大小为5:4,
-  //     success: function(res) {
-  //     },
-  //     fail: function(res) {
-  //     },
-  //   }
-  // }
+  //下拉刷新
+  onPullDownRefresh: function () {
+    this.toGetAllRecord();
+    
+  },
 
 
 })

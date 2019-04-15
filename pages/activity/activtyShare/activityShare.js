@@ -368,7 +368,7 @@ Page({
         token: appData.token,
         page: that.data.cPage,
         type: "LIBRATY",
-        limit: 10,
+        limit: 20,
         activityId: that.data.aid,
         orderByClause: 'POLL_COUNT_DESC',
       },
