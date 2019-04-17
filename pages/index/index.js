@@ -114,22 +114,19 @@ Page({
       wx.setStorageSync('code', code);
 
     } else {
-
       var code = wx.getStorageSync('code');
       if (code == null || code == '') {
         wx.showToast({
           icon: 'none',
           title: '进入万升馆',
         });
-
       } else {
         getApp().globalData.libCode = code;
       }
     }
-
-
-
   },
+
+
 
 
 
@@ -145,6 +142,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true,
       });
+      this.swithToFunction();
     } else if (this.data.canIUse) {
       wx.getSetting({
         success: res => {
@@ -159,7 +157,7 @@ Page({
                   userInfo: res.userInfo,
                   hasUserInfo: true
                 });
-                console.log(this.data.userInfo);
+                //console.log(this.data.userInfo);
                 this.swithToFunction();
               }
             });
