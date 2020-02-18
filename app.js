@@ -70,7 +70,7 @@ App({
 
 
     //馆代码
-    libCode: 'wsinterlib', //                P1ZJ0571017
+    libCode: 'P1ZJ0571017', //wsinterlib                
 
 
     //朗读模式: 0美文 1朗读 2活动朗读
