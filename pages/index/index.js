@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-const app = getApp(); 
+const app = getApp();
 const appData = getApp().globalData;
 
 Page({
@@ -17,7 +17,7 @@ Page({
   getUserInfo: function(e) {
     console.log(e);
 
-    if (e.detail.userInfo){
+    if (e.detail.userInfo) {
 
       app.globalData.userInfo = e.detail.userInfo;
       this.setData({
@@ -28,25 +28,31 @@ Page({
 
       this.swithToFunction();
 
-    }else{
+    } else {
 
       //没有获取到用户的授权
       console.log('没有获取到用户的授权');
       this.swithToFunction();
 
     }
-   
+
+  },
+
+
+  //先不授权
+  noUserinfo: function() {
+    this.swithToFunction();
   },
 
 
 
   //获取token
-  getToken:function(){
+  getToken: function() {
     var that = this;
     //1,获取openId
     var path = app.globalData.urlPath;
     wx.login({
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         //2,获取token
         wx.request({
@@ -62,7 +68,7 @@ Page({
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          success: function (res) {
+          success: function(res) {
             console.log(res);
 
             if (res.data.code == 0) {
@@ -81,7 +87,7 @@ Page({
               });
             }
           },
-          fail: function () {
+          fail: function() {
             wx.showToast({
               icon: 'none',
               title: '连接服务器失败',
@@ -93,7 +99,7 @@ Page({
     })
   },
 
-  
+
   //跳转到功能页面
   swithToFunction: function() {
     wx.switchTab({
@@ -104,7 +110,7 @@ Page({
 
 
   //获取读者信息
-  wechatInfo:function(){
+  wechatInfo: function() {
     //获取用户信息
     if (app.globalData.userInfo) {
       this.setData({
@@ -161,7 +167,7 @@ Page({
 
 
   //提交用户信息给服务器
-  uploadReader: function () {
+  uploadReader: function() {
     var path = appData.urlPath;
 
     wx.request({
@@ -176,7 +182,7 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res);
 
       },
@@ -186,7 +192,7 @@ Page({
 
 
 
-  
+
 
 
 
@@ -220,5 +226,5 @@ Page({
 
 
 
-  
+
 })

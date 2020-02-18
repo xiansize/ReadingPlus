@@ -5,7 +5,7 @@
   <view class="tips">2,需用于录制音频作品与您微信信息绑定</view>
   <view class="tips">3,点击“点击授权”进行授权</view>
   <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='userinfo'>点击授权</button>
-  <view class="usermotto">进入朗读云+</view>
+  <view class="usermotto" catchtap="noUserinfo">先不授权</view>
 </view>
 
 
