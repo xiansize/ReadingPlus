@@ -56,7 +56,7 @@
       <image class='back-listen' src='/images/icon/icon_backpress.png' wx:if="{{backArticle}}" catchtap='backToArticleRead'></image>
     </view>
     <view class='container-ready-record-start'>
-      <image class='ready-record-start-icon' src='/images/icon/icon_ready_record.png' catchtap='startRecord'></image>
+      <image class='ready-record-start-icon' src='/images/icon/icon_ready_record.png' catchtap='wechatInfo'></image>
     </view>
     <view class='container-ready-side' catchtap='readArtBackground'>
       <image class='select-music' src='/images/icon/icon_select_music.png'></image>

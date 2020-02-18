@@ -42,6 +42,21 @@ Page({
     //焦点
     focus: false,
 
+    //童心成长营
+    showBanner: true,
+
+  },
+
+
+
+  //童心成长营不显示banner
+  hiddenBanner: function() {
+    if (appData.libCode == 'P1ZJ0571017') {
+      this.setData({
+        showBanner: false,
+      });
+    }
+
   },
 
 
@@ -54,7 +69,7 @@ Page({
       data: {
         token: appData.token,
         page: 1,
-        limit: 5,
+        limit: 10,
         activityType: 'READING_ALOUD_ACTIVITY',
       },
       success: function(res) {
@@ -70,14 +85,24 @@ Page({
   //获取活动列表
   getAList: function() {
     var that = this;
-    wx.request({
-      url: appData.urlPath + '/sys/activity-main',
-      data: {
+    var rData;
+    if (that.data.showBanner) {
+      rData = {
         token: appData.token,
         page: that.data.cPage,
         limit: 10,
         activityType: 'NOTICE',
-      },
+      }
+    } else {
+      rData = {
+        token: appData.token,
+        page: that.data.cPage,
+        limit: 10,
+      }
+    }
+    wx.request({
+      url: appData.urlPath + '/sys/activity-main',
+      data: rData,
       success: function(res) {
         console.log(res.data);
 
@@ -133,14 +158,14 @@ Page({
       });
 
       that.searchList();
-      
+
     }
 
   },
 
 
   //搜索接口
-  searchList : function(){
+  searchList: function() {
     var that = this;
     wx.request({
       url: appData.urlPath + '/sys/activity-main',
@@ -150,7 +175,7 @@ Page({
         limit: 10,
         activityTitleName: that.data.sTitle,
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
 
         var c = that.data.cPage;
@@ -212,7 +237,7 @@ Page({
     var id = e.currentTarget.dataset.aid;
     var img = e.currentTarget.dataset.img;
 
-   
+
 
     wx.navigateTo({
       url: '../../../activityRead/activityRead?aid=' + id + '&img=' + img,
@@ -265,14 +290,17 @@ Page({
    */
   onReady: function() {
 
+    this.hiddenBanner();
+
+
     //获取轮播图数据
     this.getPList();
 
     //获取列表数据
     this.getAList();
 
-    
-   
+
+
 
   },
 
@@ -283,9 +311,9 @@ Page({
     //朗读
     appData.readMode = 2;
 
-    
 
-    
+
+
 
 
   },
@@ -304,10 +332,10 @@ Page({
 
   },
 
-  
+
 
   //下拉刷新
-  onPullDownRefresh : function(){
+  onPullDownRefresh: function() {
     this.backAll();
 
 
@@ -327,7 +355,7 @@ Page({
       this.getAList();
     }
 
-    
+
   },
 
 

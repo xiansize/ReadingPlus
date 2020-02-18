@@ -1,6 +1,5 @@
 {
   "pages": [
-   
     "pages/index/index",
     "pages/article/article",
     "pages/article/articleSearch/articleSearch",
@@ -14,6 +13,7 @@
     "pages/activity/activityRead/activityRead",
     "pages/activity/activityWant/activityWant",
     "pages/activity/activtyShare/activityShare",
+    "pages/activity/activityArtist/activityArtist",
     "pages/eBook/eBookCategory",
     "pages/eBook/eBookSearch/eBookSearch",
     "pages/eBook/eBookListen/eBookListen",
@@ -50,5 +50,6 @@
         "selectedIconPath": "images/icon/icon_activity.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

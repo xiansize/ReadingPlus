@@ -798,6 +798,18 @@ Page({
   },
 
 
+  //点击开始录制之前获取读者信息并提交
+  wechatInfo:function(){
+    if (app.globalData.userInfo == null){
+      wx.navigateTo({
+        url: '../../index/index?type=1',
+      });
+    }else{
+      this.startRecord();
+    }
+  },
+
+
 
 
 

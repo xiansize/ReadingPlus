@@ -26,6 +26,20 @@ Page({
     //更多
     more: false,
 
+    //童心成长营
+    isTXCZY: false,
+
+  },
+
+
+  //童心成长营显示活动热门作品
+  showHotArtist: function () {
+    if (appData.libCode == 'P1ZJ0571017') {
+      this.setData({
+        isTXCZY: true,
+      });
+    }
+
   },
 
 
@@ -63,26 +77,34 @@ Page({
     var name = e.currentTarget.dataset.name;
     var path = e.currentTarget.dataset.path;
 
-    if(path != null){
+    if (path != null) {
 
       wx.navigateTo({
-        url: '../article/articleSearch/articleSearch?type=0&id=' + id
-          + '&name=' + name
-          + '&path=' + this.data.tPath + path,
+        url: '../article/articleSearch/articleSearch?type=0&id=' + id +
+          '&name=' + name +
+          '&path=' + this.data.tPath + path,
       });
 
 
 
-    }else{
+    } else {
 
       wx.navigateTo({
-        url: '../article/articleSearch/articleSearch?type=0&id=' + id
-          + '&name=' + name
-          + '&path=/images/icon/icon_default_type.png',
+        url: '../article/articleSearch/articleSearch?type=0&id=' + id +
+          '&name=' + name +
+          '&path=/images/icon/icon_default_type.png',
       });
 
     }
 
+  },
+
+
+  //点击活动优秀的作品
+  clickToActivityArtist: function() {
+    wx.navigateTo({
+      url: '../activity/activityArtist/activityArtist',
+    })
   },
 
 
@@ -151,29 +173,7 @@ Page({
 
 
 
- 
-  //提交用户信息给服务器
-  uploadReader: function () {
-    var path = appData.urlPath;
 
-    wx.request({
-      url: path + '/sys/reader/wechat/small-program',
-      data: {
-        token: appData.token,
-        name: appData.userInfo.nickName,
-        profilePhoto: appData.userInfo.avatarUrl,
-
-      },
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function (res) {
-        console.log(res);
-
-      },
-    });
-  },
 
 
 
@@ -186,10 +186,9 @@ Page({
    */
   onLoad: function(options) {
 
-    //是否存在该用户
-    this.uploadReader();
 
-   
+
+
 
   },
 
@@ -197,7 +196,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    this.showHotArtist();
   },
 
   /**

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
-const app = getApp();
+const app = getApp(); 
+const appData = getApp().globalData;
 
 Page({
   data: {
@@ -23,6 +24,7 @@ Page({
         userInfo: e.detail.userInfo,
         hasUserInfo: true,
       });
+      this.uploadReader();
 
       this.swithToFunction();
 
@@ -30,10 +32,7 @@ Page({
 
       //没有获取到用户的授权
       console.log('没有获取到用户的授权');
-      wx.showToast({
-        icon : 'none',
-        title: '请授权',
-      });
+      this.swithToFunction();
 
     }
    
@@ -41,13 +40,13 @@ Page({
 
 
 
-  //获取token跳转到功能页面
-  swithToFunction: function() {
-
+  //获取token
+  getToken:function(){
+    var that = this;
     //1,获取openId
     var path = app.globalData.urlPath;
     wx.login({
-      success: function(res) {
+      success: function (res) {
         console.log(res);
         //2,获取token
         wx.request({
@@ -63,28 +62,26 @@ Page({
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          success: function(res) {
+          success: function (res) {
             console.log(res);
 
-            if(res.data.code == 0){
+            if (res.data.code == 0) {
 
               //保存token 和 openId
               app.globalData.token = res.data.data.token;
 
-              //3,跳转
-              wx.switchTab({
-                url: '../article/article',
-              });
+              //获取微信信息
+              that.wechatInfo();
 
-            }else{
+            } else {
 
               wx.showToast({
-                icon : 'none',
+                icon: 'none',
                 title: res.data.msg,
               });
             }
           },
-          fail: function() {
+          fail: function () {
             wx.showToast({
               icon: 'none',
               title: '连接服务器失败',
@@ -96,46 +93,18 @@ Page({
     })
   },
 
-
-
-
   
-
-
-
-  //页面加载
-  onLoad: function(options) {
-    //获取馆代码
-    var code = options.code;
-    if (code != null) {
-      //全局馆代码
-      getApp().globalData.libCode = code;
-      //缓存
-      wx.setStorageSync('code', code);
-
-    } else {
-      var code = wx.getStorageSync('code');
-      if (code == null || code == '') {
-        wx.showToast({
-          icon: 'none',
-          title: '进入万升馆',
-        });
-      } else {
-        getApp().globalData.libCode = code;
-      }
-    }
+  //跳转到功能页面
+  swithToFunction: function() {
+    wx.switchTab({
+      url: '../article/article',
+    });
   },
 
 
 
-
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
+  //获取读者信息
+  wechatInfo:function(){
     //获取用户信息
     if (app.globalData.userInfo) {
       this.setData({
@@ -184,6 +153,72 @@ Page({
         }
       });
     }
-
   },
+
+
+
+
+
+
+  //提交用户信息给服务器
+  uploadReader: function () {
+    var path = appData.urlPath;
+
+    wx.request({
+      url: path + '/sys/reader/wechat/small-program',
+      data: {
+        token: appData.token,
+        name: appData.userInfo.nickName,
+        profilePhoto: appData.userInfo.avatarUrl,
+
+      },
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function (res) {
+        console.log(res);
+
+      },
+    });
+  },
+
+
+
+
+  
+
+
+
+  //页面加载
+  onLoad: function(options) {
+    //获取馆代码
+    var code = options.code;
+    if (code != null) {
+      //全局馆代码
+      getApp().globalData.libCode = code;
+      //缓存
+      wx.setStorageSync('code', code);
+
+    } else {
+      var code = wx.getStorageSync('code');
+      if (code == null || code == '') {
+        wx.showToast({
+          icon: 'none',
+          title: '进入万升馆',
+        });
+      } else {
+        getApp().globalData.libCode = code;
+      }
+    }
+
+    this.getToken();
+  },
+
+
+
+
+
+
+  
 })

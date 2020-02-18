@@ -50,6 +50,20 @@
 
 
 
+  <!-- 活动热门作品 -->
+  <view class='list' style="margin-bottom:20rpx;" wx:if="{{isTXCZY}}">
+    <view class="container-total-list" catchtap="clickToActivityArtist">
+      <view class='container-img'>
+        <image class='list-img' src='/images/icon/icon_activity.png'></image>
+      </view>
+      <view class='list-title'>活动热门作品</view>
+      <view class='view-more'>查看</view>
+      <view class='to-click'>
+        <image class='to-img' src='/images/icon/icon_to_read.png'></image>
+      </view>
+    </view>
+  </view>
+
   <view class='list'>
     <view class='container-total-list' catchtap='clickToCharts'>
       <view class='container-img'>

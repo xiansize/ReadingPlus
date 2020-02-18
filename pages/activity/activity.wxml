@@ -19,7 +19,7 @@
     《《 返回全部活动
   </view>
 
-  <view class='banner' wx:if="{{search == false}}">
+  <view class='banner' wx:if="{{search == false && showBanner}}">
     <swiper autoplay='true' indicator-dots='true' indicator-color='#FFFFFF' indicator-active-color='#6292FF' class='banner'>
       <block wx:for="{{pList}}" wx:key='key'>
         <swiper-item class='slide-image'>

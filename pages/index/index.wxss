@@ -14,7 +14,7 @@
   font-size: 34rpx;
   background: #6292ff;
   color: #fff;
-  margin-top: 300rpx;
+  /* margin-top: 300rpx; */
 }
 
 
@@ -25,7 +25,15 @@
 }
 
 
-
+.tips{
+  width: 94%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  font-size: 30rpx;
+  color: #666666;
+}
 
 
 .wrap {
