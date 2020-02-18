@@ -87,7 +87,7 @@
         </block>
 
         <view class='container-article'>
-          <view class='container-article-title' catchtap='toListen' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
+          <view class='container-article-title' catchtap='btnReaderShare' data-rid='{{item.opusId}}' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
           <view class='container-article-author'>{{item.readerWeChatName}} 朗读</view>
         </view>
         <view class='container-collect' catchtap='toLike' data-rid='{{item.opusId}}' data-id='{{index}}'>

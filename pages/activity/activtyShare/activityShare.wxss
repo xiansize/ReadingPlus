@@ -17,8 +17,6 @@
   background: #6292FF; */
 }
 
-
-
 /* 读者信息 */
 
 .container-reader {
@@ -46,13 +44,13 @@
   overflow: hidden;
 }
 
-.reader-share{
+.reader-share {
   width: 20%;
   height: 60rpx;
   line-height: 60rpx;
   font-size: 36rpx;
-  color: #ffffff;
-  background: #6292FF;
+  color: #fff;
+  background: #6292ff;
   text-align: center;
   border-radius: 10rpx;
 }
@@ -95,16 +93,15 @@
   color: #888;
 }
 
-.container-ope{
+.container-ope {
   width: 96%;
   height: 150rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
-  
 }
 
-.ranking{
+.ranking {
   width: 41%;
   height: 130rpx;
   display: flex;
@@ -112,7 +109,7 @@
   align-items: center;
 }
 
-.ranking-item{
+.ranking-item {
   width: 100%;
   height: 70rpx;
   line-height: 70rpx;
@@ -122,29 +119,27 @@
   margin-bottom: 2rpx;
 }
 
-.ranking-icon{
+.ranking-icon {
   width: 30rpx;
   height: 30rpx;
   margin-right: 1%;
 }
 
-
-
-.btn-play{
+.btn-play {
   width: 16%;
   height: 110rpx;
   line-height: 124rpx;
-  background: #6292FF;
+  background: #6292ff;
   text-align: center;
   border-radius: 6rpx;
 }
 
-.btn-play-icon{
-  width:40rpx;
+.btn-play-icon {
+  width: 40rpx;
   height: 40rpx;
 }
 
-.title-list{
+.title-list {
   width: 100%;
   height: 80rpx;
   line-height: 80rpx;
@@ -152,10 +147,9 @@
   border-bottom: solid #ededed 2rpx;
   margin-top: 10rpx;
   font-size: 36rpx;
-  
 }
 
-.list-item{
+.list-item {
   width: 100%;
   height: 130rpx;
   border-bottom: solid #ededed 2rpx;
@@ -164,7 +158,7 @@
   align-items: center;
 }
 
-.list-item-icon{
+.list-item-icon {
   width: 100rpx;
   height: 100rpx;
   border-radius: 8rpx;
@@ -172,22 +166,27 @@
   margin-right: 2%;
 }
 
-.list-item-title{
+.list-item-title {
   width: 72%;
   height: 100rpx;
   display: flex;
   flex-direction: column;
-  
 }
 
-.list-item-article{
+.list-item-article {
   width: 100%;
   height: 60rpx;
+  line-height: 60rpx;
   font-size: 34rpx;
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
 }
 
-.list-item-reader{
+.list-item-reader {
   width: 100%;
   height: 40rpx;
   font-size: 30rpx;
@@ -195,12 +194,10 @@
   overflow: hidden;
 }
 
-.list-vote{
+.list-vote {
   width: 13%;
   height: 130rpx;
   line-height: 130rpx;
   font-size: 32rpx;
   color: #888;
 }
-
-

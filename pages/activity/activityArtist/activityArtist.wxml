@@ -1,5 +1,5 @@
 <block wx:for="{{aList}}" wx:key="key" >
-  <view class='container-search-item' catchtap='toListen' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.wcName}}'>
+  <view class='container-search-item' catchtap='toListen' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>
     <block wx:if="{{item.articleImg != null}}">
       <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
     </block>
@@ -9,7 +9,7 @@
 
     <view class='container-article'>
       <view class='container-article-title' >{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
-      <view class='container-article-author'>{{item.wcName}} 朗读</view>
+      <view class='container-article-author'>{{item.readerWeChatName}} 朗读</view>
     </view>
   </view>
 </block>
