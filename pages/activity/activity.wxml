@@ -10,7 +10,7 @@
       <view class='container-search-img'>
         <image class='search-img' src='/images/icon/icon_search.png'></image>
       </view>
-      <input class='search-title' placeholder-style='hint-text'  value='{{sTitle}}' placeholder='搜索馆内活动'  maxlength='10' confirm-type='search' bindconfirm='searchActivity' focus='{{focus}}'></input>
+      <input class='search-title' placeholder-style='hint-text' value='{{sTitle}}' placeholder='搜索馆内活动' maxlength='10' confirm-type='search' bindconfirm='searchActivity' focus='{{focus}}'></input>
     </view>
   </view>
 
@@ -37,10 +37,20 @@
         <view class='notice-item'>
           <view class='container-item-cover'>
             <image class='item-cover' src='{{aPath}}{{item.img}}'></image>
+            <view class='item-lib'>图书馆名称</view>
           </view>
           <view class='container-item-text'>
             <view class='item-title'>{{item.activityTitleName}}</view>
-            <view class='item-time'>{{item.stateTime}} ~ {{item.endTime}}</view>
+            <view class='container-item-icon-text'>
+              <image src='/images/icon/icon_activity_time.png' class='icon-item-time'></image>
+              <view class='item-tips'>{{item.stateTime}}~{{item.endTime}}</view>
+            </view>
+            <view class='container-item-icon-text'>
+              <image src='/images/icon/icon_like.png' class='icon-item-time'></image>
+              <view class='item-tips'>获赞数：</view>
+              <view class="item-like">0</view>
+            </view>
+
           </view>
         </view>
         <view class='border-item'></view>
