@@ -23,16 +23,11 @@ Page({
     //详情
     detail: '',
 
-    //1：详情  2：参与音频
-    view: 1,
-
-
 
     //活动封面根地址
     aPath: appData.urlPath + '/upload/poster/',
 
-    //活动文章根地址
-    articlePath: appData.urlPath + '/upload/articles/',
+  
 
     //活动id
     aid: null,
@@ -70,8 +65,18 @@ Page({
     //活动过期
     timeup: false,
 
+  
+    //展开
+    detailMore : "展开详情>>",
 
 
+    //图书馆,名称头像
+    libName : null,
+    libIcon : null,
+    libIconPath: appData.urlPath + '/upload/library/head/',
+
+    //
+    iconLike: '/images/icon/icon_collect_grey.png',
   },
 
 
@@ -85,25 +90,29 @@ Page({
 
 
 
-  //导航浏览量
-  navToImg: function() {
-    var that = this;
-    if (that.data.view == 2) {
-      that.setData({
-        view: 1,
-      });
-    }
+  //点击关注公众号
+  btnFollowSub :function(){
+    wx.navigateTo({
+      url: '../activityLib/activityLib',
+    })
+
   },
 
 
 
 
-  //导航参与音频
-  navToMusic: function() {
+
+
+  //展开/收起
+  btnShowDetailMore : function(){
     var that = this;
-    if (that.data.view == 1) {
+    if (that.data.detailMore == '展开详情>>'){
       that.setData({
-        view: 2,
+        detailMore: "收起详情<<",
+      });
+    }else{
+      that.setData({
+        detailMore: "展开详情>>",
       });
     }
   },
@@ -224,6 +233,7 @@ Page({
           var list = that.data.rList;
           //添加进去
           for (var i = 0; i < total.length; i++) {
+            total[i].iconLike = '/images/icon/icon_collect_grey.png';
             list.push(total[i]);
           };
 
@@ -352,6 +362,7 @@ Page({
         if (res.data.code == 0) {
           var list = that.data.rList;
           list[index].pollCount++;
+          list[index].iconLike = '/images/icon/icon_collect.png';
           that.setData({
             rList: list
           });
@@ -427,6 +438,18 @@ Page({
 
           });
 
+          if(res.data.data.otherLibName != null){
+            that.setData({
+              libName: res.data.data.otherLibName,
+            });
+          }
+
+          if(res.data.data.otherHeadImg != null){
+            that.setData({
+              libIcon: res.data.data.otherHeadImg,
+            });
+          }
+
 
           //朗读截止日期
           if (new Date() <= res.data.data.contestEndTime) {
@@ -483,6 +506,7 @@ Page({
           var list = that.data.rList;
           //添加进去
           for (var i = 0; i < total.length; i++) {
+            total[i].iconLike = '/images/icon/icon_collect_grey.png';
             list.push(total[i]);
           };
 

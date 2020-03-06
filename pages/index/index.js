@@ -211,7 +211,7 @@ Page({
       if (code == null || code == '') {
         wx.showToast({
           icon: 'none',
-          title: '进入万升馆',
+          title: '童心成长营',
         });
       } else {
         getApp().globalData.libCode = code;

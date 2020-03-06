@@ -19,22 +19,9 @@ Page({
     //朗读活动id
     aid: null,
 
-    //活动文章根地址
-    articlePath: appData.urlPath + '/upload/articles/',
+ 
 
-    //作品信息
-    rTitle: null,
-    readerName: null,
-    like: null,
-    img: null,
-    path: null,
-    articleId: null,
-
-    //活动是否上传了作品
-    haveRecord: false,
-
-    //作品审核状态
-    status: null,
+ 
 
 
 
@@ -64,6 +51,32 @@ Page({
         that.setData({
           tList: res.data.data
         });
+
+        //如果只是只有一个类就直接去到文章界面
+        if(that.data.tList.length == 1){
+          var tData = that.data.tList;
+          var id = tData[0].typeId;
+          var name = tData[0].typeName;
+          var path = tData[0].img;
+          if (path != null) {
+            wx.navigateTo({
+              url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
+                '&name=' + name +
+                '&path=' + that.data.tPath + path +
+                '&aid=' + that.data.aid,
+            });
+          } else {
+            wx.navigateTo({
+              url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
+                '&name=' + name +
+                '&path=/images/icon/icon_default_type.png' +
+                '&aid=' + that.data.aid,
+            });
+          }
+          
+        }
+
+
       },
     });
   },
@@ -114,74 +127,10 @@ Page({
 
 
 
-  //获取个人活动作品
-  getPersonalRecord: function() {
-    var that = this;
-    wx.request({
-      url: appData.urlPath + '/sys/opus',
-      data: {
-        token: appData.token,
-        type: 'PERSONAGE',
-        page: 1,
-        limit: 99,
-        activityId: that.data.aid,
-      },
-      success: function(res) {
-        console.log(res);
-
-        if (res.data.data.length != 0) {
-          var item = res.data.data[0];
-
-          var s = item.opusStart
-          if (s == 'UNREVIEWED') {
-            s = '审核中'
-          } else {
-            s = '已发布'
-          }
-
-          that.setData({
-            haveRecord: true,
-            like: item.collectionCount,
-            rTitle: item.titleName,
-            img: item.articleImg,
-            status: s,
-            path: item.opusPath,
-            articleId: item.articleId,
-          });
-
-        }
-      },
-    });
+ 
 
 
-  },
-
-
-  //听活动的作品
-  toListen: function() {
-    var that = this;
-    var aid = that.data.articleId;
-    var path = that.data.path;
-
-
-
-    if (aid != null) {
-      wx.navigateTo({
-        url: '../../read/readArticle/readArticle?id=' + aid +
-          '&path=' + path +
-          '&name=' + '本人朗读',
-      });
-    } else {
-      wx.navigateTo({
-        url: '../../read/readArticle/readArticle?free=' + 1 +
-          '&path=' + path +
-          '&name=' + '本人朗读',
-      });
-    }
-
-
-
-  },
+  
 
 
 

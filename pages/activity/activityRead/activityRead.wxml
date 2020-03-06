@@ -2,67 +2,76 @@
 <template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
 <image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
 
-<view class='read' catchtap='wantToRead' wx:if="{{view == 1 && during}}">我要朗读</view>
+<image class='read' src='/images/logo/logo_read.png' catchtap='wantToRead' wx:if="{{during}}"></image>
 
 <view class='wrap'>
-  <image class='cover' src='{{cover}}' wx:if="{{view == 1}}"></image>
+  <image class='cover' src='{{cover}}'></image>
 
   <view class='middle'>
+    <view class="container-activity-lib" catchtap="btnFollowSub" wx:if="{{libName != null}}">
+      <image class="icon-lib" wx:if="{{libIcon != null}}" src="{{libIconPath}}{{libIcon}}"></image>
+      <view class="lib-name">{{libName}}</view>
+      <view class="follow-sub">关注公众号</view>
+      <image class="icon-follow" src="/images/icon/icon_arrow.png"></image>
+    </view>
     <view class='activity-title'>{{aTitle}}</view>
     <view class='container-msg'>
-      <image class='activity-icon' src='/images/icon/icon_date.png'></image>
+      <image class='activity-icon' src='/images/icon/icon_all_record.png'></image>
+      <view class='activity-msg'>参与作品：{{numbers}}</view>
+    </view>
+    <view class='container-msg'>
+      <image class='activity-icon' src='/images/icon/icon_like.png'></image>
+      <view class='activity-msg'>获赞数量：{{likes}}</view>
+    </view>
+    <view class='container-msg'>
+      <image class='activity-icon' src='/images/icon/icon_activity_time.png'></image>
       <view class='activity-msg'>{{date}}</view>
       <view class='activity-timeup' wx:if="{{timeup}}">活动已结束</view>
     </view>
 
-    <view class='container-views' wx:if="{{view == 1}}">
-      <view class='container-likes right'>
-        <view class='likes likes-name'>{{likes}}</view>
-        <view class='likes'>获赞数量</view>
-      </view>
-      <view class='container-likes left'>
-        <view class='likes likes-name'>{{numbers}}</view>
-        <view class='likes'>参与作品</view>
-      </view>
+    <text class='detail {{detailMore == "展开详情>>" ? "detail-show" : "detail-hidden" }}' decode='true'>{{detail}}</text>
+  
+    <view class="container-show-more">
+      <text class="detail-more" catchtap="btnShowDetailMore" decode="true">{{detailMore}}</text>
     </view>
+
+
   </view>
 
-  <view class='nav'>
-    <view class='nav-item'>
-      <view class='nav-name' style="color:{{view == 1 ? '#6292FF' : '#999999'}}" catchtap='navToImg'>详情</view>
-      <view class='nav-ind' wx:if="{{view == 1}}"></view>
-    </view>
-    <view class='nav-item'>
-      <view class='nav-name' style="color:{{view == 2 ? '#6292FF' : '#999999'}}" catchtap='navToMusic'>参与音频</view>
-      <view class='nav-ind' wx:if="{{view == 2}}"></view>
-    </view>
-  </view>
 
-  <view class='container-detail' wx:if="{{view == 1}}">
-    <text class='detail' decode='true'>{{detail}}</text>
-  </view>
 
-  <view class='search' wx:if="{{view == 2}}">
-    <view class='container-search'>
+  <view class='search'>
+    <view class='container-search' >
       <image class='icon-search' src='/images/icon/icon_search.png'></image>
       <input class='search-input' maxlength='15' value='{{sTitle}}' placeholder='搜索音频' confirm-type='search' bindconfirm='toSearch' focus='{{focus}}'></input>
     </view>
 
-    <view class='contaienr-back' catchtap='toGetAllRecord' wx:if="{{search}}">《《 返回全部音频</view>
+    <text class='container-back' catchtap='toGetAllRecord' wx:if="{{search}}" decode="true">&lt;&lt; 返回全部音频</text>
+
+
+    <!-- 暂无作品 -->
+    <image src='/images/logo/logo_no_record.png' class='logo-no-record' wx:if="{{rList.length <= 0 && mList.length <= 0 }}"></image>
+    <view class="no-record" wx:if="{{rList.length <= 0 && mList.length <= 0}}">暂无参与的音频作品</view>
+    <view class="want-join" catchtap='wantToRead' wx:if="{{during && rList.length <= 0 && mList.length <= 0}}">我要朗读</view>
 
     <!-- 本人阅读 -->
-    <view class='title-record'>个人作品</view>
     <block wx:for="{{mList}}" wx:key="key">
-      <view class='container-search-item'  data-rid='{{item.opusId}}'  catchtap='btnReaderShare'>
-         <block wx:if="{{item.articleImg != null}}">
-          <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
+      <view class='container-search-item container-search-item-shelf' data-rid='{{item.opusId}}' catchtap='btnReaderShare'>
+        <image class="icon-shelf" src="/images/icon/icon_index.png"></image>
+       <!-- <block wx:if="{{item.readerWeChatprofilePhoto != null}}">
+          <image class='container-article-cover' src='{{item.readerWeChatprofilePhoto}}'></image>
         </block>
         <block wx:else>
           <image class='container-article-cover' src='/images/background/bg_view.png'></image>
-        </block>
+        </block> -->
+        <view class='container-article-cover'>
+         <open-data type="userAvatarUrl" ></open-data>
+        </view>
+        
         <view class='container-article'>
-          <view class='container-article-title'>{{item.titleName == null ? '自由朗读': item.titleName}}</view>
           <view class='container-article-author'>本人朗读</view>
+          <view class='container-article-title'>{{item.titleName == null ? '自由朗读': item.titleName}}</view>
+
         </view>
         <view class='container-collect'>
           <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
@@ -73,25 +82,26 @@
 
 
 
-    <view class='border'></view>
+
 
     <!-- 全部音频 -->
-    <view class='title-record'>全部作品</view>
     <block wx:for="{{rList}}" wx:key="key">
       <view class='container-search-item'>
-        <block wx:if="{{item.articleImg != null}}">
-          <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
+        <view class="icon-shelf" src="/images/icon/icon_index.png"></view>
+        <block wx:if="{{item.readerWeChatprofilePhoto != null}}">
+          <image class='container-article-cover' src='{{item.readerWeChatprofilePhoto}}'></image>
         </block>
         <block wx:else>
           <image class='container-article-cover' src='/images/background/bg_view.png'></image>
         </block>
 
-        <view class='container-article'>
-          <view class='container-article-title' catchtap='btnReaderShare' data-rid='{{item.opusId}}' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
+        <view class='container-article' catchtap='btnReaderShare' data-rid='{{item.opusId}}' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>
           <view class='container-article-author'>{{item.readerWeChatName}} 朗读</view>
+          <view class='container-article-title'>{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
+
         </view>
         <view class='container-collect' catchtap='toLike' data-rid='{{item.opusId}}' data-id='{{index}}'>
-          <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
+          <image class='icon-collect' src='{{item.iconLike}}'></image>
           <view class='collect-number'>{{item.pollCount}}</view>
         </view>
       </view>
@@ -113,5 +123,4 @@
     </view>
     <view class='btn-phone' catchtap='btnPhone'>确定</view>
   </view>
-
 </view>

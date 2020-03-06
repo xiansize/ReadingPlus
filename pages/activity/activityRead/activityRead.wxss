@@ -1,7 +1,7 @@
 @import "../../../template/titlebar/titlebar.wxss";
 
 page {
-  background: #f5f5f9;
+  background: #fff;
 }
 
 .backpress {
@@ -14,15 +14,11 @@ page {
 }
 
 .read {
-  width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
-  background: #6292ff;
-  text-align: center;
-  color: #fff;
-  font-size: 30rpx;
+  width: 140rpx;
+  height: 130rpx;
   position: fixed;
-  bottom: 0rpx;
+  bottom: 30rpx;
+  right: 30rpx;
 }
 
 .wrap {
@@ -47,14 +43,54 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: solid #ddd 2rpx;
+}
+
+.container-activity-lib {
+  width: 92%;
+  height: 124rpx;
+  border-bottom: solid #f0f0f0 1rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon-lib {
+  width: 84rpx;
+  height: 84rpx;
+}
+
+.lib-name {
+  width: 60%;
+  height: 124rpx;
+  line-height: 124rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-left: 2%;
+  color: #333;
+  overflow: hidden;
+}
+
+.follow-sub {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #999;
+  height: 124rpx;
+  line-height: 124rpx;
+  margin-right: 24rpx;
+}
+
+.icon-follow {
+  width: 12rpx;
+  height: 20rpx;
 }
 
 .activity-title {
   width: 92%;
-  color: #222;
-  font-size: 32rpx;
-  margin-top: 20rpx;
+  height: auto;
+  margin: 32rpx 0rpx 32rpx 0rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
 }
 
 .container-msg {
@@ -62,21 +98,20 @@ page {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 30rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .activity-icon {
   width: 30rpx;
-  height: 30rpx;
+  height: 28rpx;
   margin-right: 20rpx;
 }
 
 .activity-msg {
-  width: 70%;
+  width: auto;
   height: 100%;
-  color: #999;
-  font-size: 30rpx;
+  color: #333;
+  font-size: 26rpx;
 }
 
 .activity-timeup {
@@ -89,74 +124,6 @@ page {
   text-align: center;
 }
 
-.container-views {
-  width: 92%;
-  height: 108rpx;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 40rpx;
-}
-
-.container-likes {
-  width: 48%;
-  height: 100%;
-  background: #f4f4f4;
-  border-radius: 2rpx;
-}
-
-.right {
-  margin-right: 2%;
-}
-
-.left {
-  margin-left: 2%;
-}
-
-.likes {
-  width: 100%;
-  height: 50%;
-  font-size: 26rpx;
-  color: #666;
-  text-align: center;
-}
-
-.likes-name {
-  line-height: 64rpx;
-}
-
-.nav {
-  width: 100%;
-  height: 90rpx;
-  background: #fff;
-  border-bottom: solid #ddd 2rpx;
-  display: flex;
-  flex-direction: row;
-}
-
-.nav-item {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.nav-name {
-  width: 50%;
-  height: 90%;
-  line-height: 90rpx;
-  text-align: center;
-  color: #6292ff;
-  font-size: 28rpx;
-}
-
-.nav-ind {
-  width: 30rpx;
-  height: 10%;
-  background: #6292ff;
-  border-radius: 2rpx;
-}
-
 .container-detail {
   width: 100%;
   height: auto;
@@ -167,15 +134,46 @@ page {
   margin-bottom: 90rpx;
 }
 
+
+
 .detail {
   width: 92%;
-  height: 100%;
-  line-height: 40rpx;
   letter-spacing: 2rpx;
   font-size: 30rpx;
   color: #666;
   background: #fff;
-  margin-top: 20rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.detail-show {
+  -webkit-line-clamp: 3;
+}
+
+.detail-hidden {
+  -webkit-line-clamp: 50;
+}
+
+
+.container-show-more{
+  width: 92%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon-show-more{
+  width: 20rpx;
+  height: 16rpx;
+  
+}
+
+.detail-more {
+  color: #6292ff;
+  font-size: 28rpx;
+  margin-right: 6rpx;
 }
 
 .search {
@@ -189,10 +187,10 @@ page {
 
 .container-search {
   width: 92%;
-  height: 64rpx;
+  height: 68rpx;
   background: #f4f4f4;
   border-radius: 6rpx;
-  margin-top: 20rpx;
+  margin-bottom: 30rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -209,58 +207,99 @@ page {
   width: 76%;
   height: 30rpx;
   color: #333;
-  font-size: 26rpx;
+  font-size: 28rpx;
 }
 
-.contaienr-back {
+.container-back {
   width: 92%;
   height: 66rpx;
-  line-height: 64rpx;
+  line-height: 66rpx;
   color: #999;
   font-size: 26rpx;
 }
 
+.logo-no-record {
+  width: 224rpx;
+  height: 224rpx;
+}
+
+.no-record {
+  font-size: 26rpx;
+  color: #aaa;
+  margin-top: 40rpx;
+}
+
+.want-join {
+  width: 300rpx;
+  height: 78rpx;
+  line-height: 78rpx;
+  border: solid 1rpx #6292FF;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+  color: #6292FF;
+  text-align: center;
+  margin : 50rpx 0rpx 50rpx 0rpx;
+}
+
 .container-search-item {
-  width: 92%;
-  height: 230rpx;
+  width: 100%;
+  height: 150rpx;
   background: #fff;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
+.container-search-item-shelf {
+  background: #f6f8fe;
+}
+
 .container-article-cover {
-  width: 18%;
-  height: 170rpx;
-  border-radius: 6rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
   margin-right: 2%;
+  overflow: hidden;
+  will-change: transform;
 }
 
 .container-article {
-  width: 68%;
+  width: 62%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
+.icon-shelf {
+  width: 20rpx;
+  height: 36rpx;
+  margin-right: 2%;
+}
+
 .container-article-title {
+  width: 100%;
+  height: 48%;
+  font-size: 26rpx;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.container-article-author {
   width: 94%;
   height: 52%;
-  line-height: 170rpx;
+  line-height: 100rpx;
   font-size: 30rpx;
   color: #333;
+  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-}
-
-.container-article-author {
-  width: 100%;
-  height: 48%;
-  font-size: 26rpx;
-  color: #999;
 }
 
 .container-collect {
@@ -274,7 +313,7 @@ page {
 .collect-number {
   width: auto;
   height: 100%;
-  line-height: 230rpx;
+  line-height: 150rpx;
   font-size: 30rpx;
   color: #aaa;
   text-align: center;
@@ -284,7 +323,6 @@ page {
 .icon-collect {
   width: 30rpx;
   height: 30rpx;
-  
 }
 
 .border {
@@ -328,12 +366,9 @@ page {
   margin-left: 6%;
   height: 60rpx;
   border-bottom: solid #6292ff 2rpx;
-  
 }
 
-
-
-.btn-phone{
+.btn-phone {
   width: 36%;
   height: 70rpx;
   line-height: 70rpx;
@@ -346,12 +381,9 @@ page {
   font-size: 30rpx;
 }
 
-
-.title-record{
-  width: 92%;
-  height: 46rpx;
-  line-height: 46rpx;
-  border-bottom: solid 2rpx #dddddd;
+.loading-more {
+  height: 120rpx;
+  line-height: 120rpx;
+  color: #c5c5c5;
   font-size: 26rpx;
-  
 }

@@ -38,8 +38,7 @@ Page({
     aTitle: null,
     author: 'author',
     text: '',
-    //活动文章根地址
-    articlePath: appData.urlPath + '/upload/articles/',
+    
 
 
     //读者

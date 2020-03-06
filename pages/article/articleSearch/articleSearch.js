@@ -55,7 +55,8 @@ Page({
     //活动id
     aid: null,
 
-
+    //全部文章
+    allArticle : 0,
 
   },
 
@@ -276,6 +277,7 @@ Page({
             aList: list,
             more: null,
             cPage: c,
+            allArticle :res.data.count,
           });
         } else {
           that.setData({
@@ -324,6 +326,7 @@ Page({
             aList: list,
             more: null,
             cPage: c,
+            
           });
         } else {
           that.setData({

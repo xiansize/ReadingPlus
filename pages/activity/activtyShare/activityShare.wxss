@@ -31,7 +31,7 @@
 .avatar {
   width: 90rpx;
   height: 90rpx;
-  border-radius: 45rpx;
+  border-radius: 50%;
 }
 
 .reader-name {
@@ -151,7 +151,7 @@
 
 .list-item {
   width: 100%;
-  height: 130rpx;
+  height: 150rpx;
   border-bottom: solid #ededed 2rpx;
   display: flex;
   flex-direction: row;
@@ -161,13 +161,13 @@
 .list-item-icon {
   width: 100rpx;
   height: 100rpx;
-  border-radius: 8rpx;
+  border-radius: 50%;
   margin-left: 2%;
   margin-right: 2%;
 }
 
 .list-item-title {
-  width: 72%;
+  width: 74%;
   height: 100rpx;
   display: flex;
   flex-direction: column;

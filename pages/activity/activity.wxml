@@ -16,7 +16,7 @@
 
 
   <view class='back-all' wx:if="{{search}}" catchtap='backAll'>
-    《《 返回全部活动
+    <text decode="true">&lt;&lt;返回全部活动</text>
   </view>
 
   <view class='banner' wx:if="{{search == false && showBanner}}">
@@ -37,7 +37,7 @@
         <view class='notice-item'>
           <view class='container-item-cover'>
             <image class='item-cover' src='{{aPath}}{{item.img}}'></image>
-            <view class='item-lib'>图书馆名称</view>
+            <view class='item-lib' wx:if="{{item.otherLibName != null}}">{{item.otherLibName}}</view>
           </view>
           <view class='container-item-text'>
             <view class='item-title'>{{item.activityTitleName}}</view>
@@ -45,10 +45,10 @@
               <image src='/images/icon/icon_activity_time.png' class='icon-item-time'></image>
               <view class='item-tips'>{{item.stateTime}}~{{item.endTime}}</view>
             </view>
-            <view class='container-item-icon-text'>
+            <view class='container-item-icon-text' wx:if="{{item.pollCount != null}}">
               <image src='/images/icon/icon_like.png' class='icon-item-time'></image>
               <view class='item-tips'>获赞数：</view>
-              <view class="item-like">0</view>
+              <view class="item-like">{{item.pollCount}}</view>
             </view>
 
           </view>
