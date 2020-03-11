@@ -3,31 +3,45 @@
 <image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
 
 <view class='wrap'>
-  
+
   <text class="read-free" catchtap="toFreeRead" decode="true">自由朗读&nbsp;&gt;&gt;</text>
 
-  <view class='container-category'>
 
-    <block wx:for="{{tList}}" wx:key="key" wx:for-item="item">
+  <block wx:for="{{tList}}" wx:key="key" wx:for-item="item" wx:for-index="idx">
+    <view class='container-category-item' catchtap='clickCategoryItem' data-tid="{{item.typeId}}" data-name="{{item.typeName}}" data-path="{{item.img}}" style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}">
+      <block wx:if="{{item.img}}">
+        <image class='category-cover' src='{{tPath}}{{item.img}}'></image>
+      </block>
+      <block wx:else>
+        <image class='category-cover' src='/images/icon/icon_default_type.png'></image>
+      </block>
+      <view class='category-title'>{{item.typeName}}</view>
+    </view>
 
-      <view class='container-category-item' catchtap='clickCategoryItem' data-tid="{{item.typeId}}" data-name="{{item.typeName}}" data-path="{{item.img}}">
-        <view class='container-category-cover'>
-          <block wx:if="{{item.img}}">
-            <image class='category-cover' src='{{tPath}}{{item.img}}'></image>
-          </block>
-          <block wx:else>
-            <image class='category-cover' src='/images/icon/icon_default_type.png'></image>
-          </block>
+    <text class="all-item" decode="true" wx:if="{{item.aList}}">|&nbsp;&nbsp;共{{item.aList.length}}篇文章</text>
+    <block wx:for="{{item.aList}}" wx:key="aKey" wx:for-item="aItem">
+      <view class='container-article' catchtap='clickArticleItem' data-id="{{aItem.id}}">
+        <block wx:if="{{aItem.img != null}}">
+          <image class='icon' src="{{cPath}}{{aItem.img}}"></image>
+        </block>
+        <block wx:else>
+          <image class='icon' style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}"></image>
+        </block>
+
+        <view class='container-text'>
+          <text class='article-title'>{{aItem.titleName}}</text>
+          <text class='article-author'>{{aItem.author}}</text>
         </view>
-        <view class='category-title'>{{item.typeName}}</view>
+        <text class='to-read' decode='true' style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}">&gt;</text>
       </view>
 
     </block>
 
 
 
-  </view>
+  </block>
+
+
+
 
 </view>
-
-

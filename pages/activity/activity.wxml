@@ -19,15 +19,7 @@
     <text decode="true">&lt;&lt;返回全部活动</text>
   </view>
 
-  <view class='banner' wx:if="{{search == false && showBanner}}">
-    <swiper autoplay='true' indicator-dots='true' indicator-color='#FFFFFF' indicator-active-color='#6292FF' class='banner'>
-      <block wx:for="{{pList}}" wx:key='key'>
-        <swiper-item class='slide-image'>
-          <image src="{{aPath}}{{item.img}}" class='slide-image' data-aid='{{item.id}}' data-img='{{item.img}}' catchtap='clickToActivity' />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
+
 
   <view class='notice'>
 
@@ -43,7 +35,7 @@
             <view class='item-title'>{{item.activityTitleName}}</view>
             <view class='container-item-icon-text'>
               <image src='/images/icon/icon_activity_time.png' class='icon-item-time'></image>
-              <view class='item-tips'>{{item.stateTime}}~{{item.endTime}}</view>
+              <view class='item-tips'>{{item.sTime}}~{{item.eTime}}</view>
             </view>
             <view class='container-item-icon-text' wx:if="{{item.pollCount != null}}">
               <image src='/images/icon/icon_like.png' class='icon-item-time'></image>

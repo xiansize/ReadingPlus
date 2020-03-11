@@ -32,65 +32,110 @@ page {
   line-height: 78rpx;
   text-align: center;
   font-size: 30rpx;
-  color: #6292FF;
-  background: #FFFFFF;
+  color: #333333;
+  background: #EEEEEE;
   border-radius: 10rpx;
   position: fixed;
-  bottom: 70rpx;
+  bottom: 60rpx;
 }
 
 
-.container-category {
-  width: 100%;
-  height: auto;
-  background: #fff;
-  margin-bottom: 20rpx;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  
-  
-}
+
 
 .container-category-item{
-  width:20%;
-  height: 50%;
+  width:92%;
+  height: 140rpx;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  background: #64ACFC;
+  border-radius: 10rpx;
+  margin:50rpx 0rpx 0rpx 0rpx;
 }
 
 
-.container-category-cover{
-  width: 110rpx;
-  height: 110rpx;
-  margin-top: 30rpx;
-  
-}
+
 
 .category-cover{
-  width: 100%;
-  height: 100%;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
+  margin:0rpx 20rpx 0rpx 20rpx;
 }
 
 .category-title{
-  width: 100%;
-  height: 32rpx;
-  line-height: 32rpx;
-  color: #222222;
-  font-size: 26rpx;
+  width: auto;
+  color: #ffffff;
+  font-size: 30rpx;
   text-align: center;
-  margin-top: 10rpx;
-  overflow: hidden;
+}
+
+
+.all-item{
+  width: 92%;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #999999;
+  font-size: 24rpx;
+}
+
+
+.container-article{
+  width: 92%;
+  height: 140rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.icon{
+  width: 90rpx;
+  height: 90rpx;
+  margin: 0 2% 0 2%;
+}
+
+.container-text{
+  width: 72%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-title{
+  width: 100%;
+  height: 80rpx;
+  line-height: 100rpx;
+  color: #333333;
+  font-size: 30rpx;
+   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  
-
 }
 
+.article-author{
+  width: 100%;
+  height: 60rpx;
+  color: #999999;
+  font-size: 26rpx;
+   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 
-
+.to-read{
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 48rpx;
+  border-radius: 50%;
+  background: #64ACFC;
+  text-align: center;
+  color: #ffffff;
+}
 

@@ -27,7 +27,7 @@ Page({
     //活动封面根地址
     aPath: appData.urlPath + '/upload/poster/',
 
-  
+
 
     //活动id
     aid: null,
@@ -65,18 +65,18 @@ Page({
     //活动过期
     timeup: false,
 
-  
+
     //展开
-    detailMore : "展开详情>>",
+    detailMore: "展开详情>>",
 
 
-    //图书馆,名称头像
-    libName : null,
-    libIcon : null,
+    //图书馆,名称头像,文章关注链接
+    libName: null,
+    libIcon: null,
     libIconPath: appData.urlPath + '/upload/library/head/',
+    libUrl: null,
 
-    //
-    iconLike: '/images/icon/icon_collect_grey.png',
+
   },
 
 
@@ -91,9 +91,10 @@ Page({
 
 
   //点击关注公众号
-  btnFollowSub :function(){
+  btnFollowSub: function() {
+    var that = this;
     wx.navigateTo({
-      url: '../activityLib/activityLib',
+      url: '../activityLib/activityLib?libUrl=' + that.data.libUrl,
     })
 
   },
@@ -104,13 +105,13 @@ Page({
 
 
   //展开/收起
-  btnShowDetailMore : function(){
+  btnShowDetailMore: function() {
     var that = this;
-    if (that.data.detailMore == '展开详情>>'){
+    if (that.data.detailMore == '展开详情>>') {
       that.setData({
         detailMore: "收起详情<<",
       });
-    }else{
+    } else {
       that.setData({
         detailMore: "展开详情>>",
       });
@@ -143,7 +144,7 @@ Page({
     var that = this;
     var rid = e.currentTarget.dataset.rid;
     wx.navigateTo({
-      url: '../../activity/activtyShare/activityShare?rid=' + rid 
+      url: '../../activity/activtyShare/activityShare?rid=' + rid
     });
   },
 
@@ -193,7 +194,7 @@ Page({
         });
 
       },
-      complete:function(){
+      complete: function() {
         wx.stopPullDownRefresh();
       },
     });
@@ -202,8 +203,64 @@ Page({
   },
 
 
+  //点击进行活动朗读
+  wantToRead: function() {
+    var that = this;
+    that.getReaderInfo(0);
+  },
 
 
+
+  //活动全部音频
+  getRList: function() {
+    var that = this;
+
+    wx.request({
+      url: appData.urlPath + '/sys/opus',
+      data: {
+        token: appData.token,
+        page: that.data.cPage,
+        type: "LIBRATY",
+        limit: 20,
+        activityId: that.data.aid,
+        orderByClause: 'POLL_COUNT_DESC',
+      },
+      success: function(res) {
+        console.log(res.data);
+
+        var c = that.data.cPage;
+        if (c <= res.data.pageCount) {
+          //获取到的分页数据
+          var total = res.data.data;
+          //原来就有的数据
+          var list = that.data.rList;
+          //添加进去
+          for (var i = 0; i < total.length; i++) {
+            total[i].iconLike = '/images/icon/icon_collect_grey.png';
+            total[i].textColor = '#AAAAAA';
+            total[i].collectMore = 0;
+            total[i].collectMoreColor = '#FFFFFF';
+            list.push(total[i]);
+
+          };
+
+          //分页加1
+          c++;
+
+          that.setData({
+            rList: list,
+            more: null,
+            cPage: c,
+            numbers: res.data.count == null ? 0 : res.data.count,
+          });
+        } else {
+          that.setData({
+            more: '没有更多了..'
+          });
+        }
+      },
+    });
+  },
 
 
 
@@ -234,6 +291,9 @@ Page({
           //添加进去
           for (var i = 0; i < total.length; i++) {
             total[i].iconLike = '/images/icon/icon_collect_grey.png';
+            total[i].textColor = '#AAAAAA';
+            total[i].collectMore = 0;
+            total[i].collectMoreColor = '#FFFFFF';
             list.push(total[i]);
           };
 
@@ -256,11 +316,7 @@ Page({
   },
 
 
-  //点击进行活动朗读
-  wantToRead: function() {
-    var that = this;
-    that.getReaderInfo(0);
-  },
+
 
 
 
@@ -274,6 +330,66 @@ Page({
 
   },
 
+
+
+
+
+
+
+  //投票接口
+  requestLike: function(id, index) {
+    var that = this;
+    wx.request({
+      url: appData.urlPath + '/sys/opus/' + id + '/pull',
+      data: {
+        token: appData.token,
+        opusId: id
+      },
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.data.code == 0) {
+          var list = that.data.rList;
+          list[index].pollCount++;
+          list[index].iconLike = '/images/gif/gif_like.gif';
+          list[index].textColor = '#FF5451';
+          list[index].collectMore++;
+          list[index].collectMoreColor = '#FF5451';
+
+          that.setData({
+            rList: list
+          });
+
+          setTimeout(function() {
+            list[index].iconLike = '/images/icon/icon_like_show.png';
+            that.setData({
+              rList: list
+            });
+          }, 220);
+
+          setTimeout(function () {
+            list[index].collectMoreColor = '#FFFFFF';
+            that.setData({
+              rList: list
+            });
+          }, 500);
+
+          
+
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.msg,
+          });
+        }
+
+      },
+    });
+
+  },
 
 
   //获取用户信息，查看是否有手机号。如果没有，添加手机号
@@ -343,47 +459,6 @@ Page({
   },
 
 
-
-  //投票接口
-  requestLike: function(id, index) {
-    var that = this;
-    wx.request({
-      url: appData.urlPath + '/sys/opus/' + id + '/pull',
-      data: {
-        token: appData.token,
-        opusId: id
-      },
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      success: function(res) {
-        console.log(res);
-        if (res.data.code == 0) {
-          var list = that.data.rList;
-          list[index].pollCount++;
-          list[index].iconLike = '/images/icon/icon_collect.png';
-          that.setData({
-            rList: list
-          });
-
-          wx.showToast({
-            title: '投票成功',
-          });
-
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: res.data.msg,
-          });
-        }
-
-      },
-    });
-
-  },
-
-
   //去听
   toListen: function(e) {
 
@@ -438,15 +513,21 @@ Page({
 
           });
 
-          if(res.data.data.otherLibName != null){
+          if (res.data.data.otherLibName != null) {
             that.setData({
               libName: res.data.data.otherLibName,
             });
           }
 
-          if(res.data.data.otherHeadImg != null){
+          if (res.data.data.otherHeadImg != null) {
             that.setData({
               libIcon: res.data.data.otherHeadImg,
+            });
+          }
+
+          if (res.data.data.otherLibUrl != null) {
+            that.setData({
+              libUrl: res.data.data.otherLibUrl,
             });
           }
 
@@ -481,52 +562,7 @@ Page({
 
 
 
-  //活动全部音频
-  getRList: function() {
-    var that = this;
 
-    wx.request({
-      url: appData.urlPath + '/sys/opus',
-      data: {
-        token: appData.token,
-        page: that.data.cPage,
-        type: "LIBRATY",
-        limit: 20,
-        activityId: that.data.aid,
-        orderByClause: 'POLL_COUNT_DESC',
-      },
-      success: function(res) {
-        console.log(res.data);
-
-        var c = that.data.cPage;
-        if (c <= res.data.pageCount) {
-          //获取到的分页数据
-          var total = res.data.data;
-          //原来就有的数据
-          var list = that.data.rList;
-          //添加进去
-          for (var i = 0; i < total.length; i++) {
-            total[i].iconLike = '/images/icon/icon_collect_grey.png';
-            list.push(total[i]);
-          };
-
-          //分页加1
-          c++;
-
-          that.setData({
-            rList: list,
-            more: null,
-            cPage: c,
-            numbers: res.data.count == null ? 0 : res.data.count,
-          });
-        } else {
-          that.setData({
-            more: '没有更多了..'
-          });
-        }
-      },
-    });
-  },
 
 
 
@@ -547,7 +583,7 @@ Page({
   },
 
 
- 
+
 
 
   /**
@@ -563,7 +599,7 @@ Page({
 
     this.getDetail();
     this.getRList();
-   
+
 
   },
 
@@ -623,9 +659,9 @@ Page({
 
 
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.toGetAllRecord();
-    
+
   },
 
 

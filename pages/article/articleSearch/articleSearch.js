@@ -56,7 +56,7 @@ Page({
     aid: null,
 
     //全部文章
-    allArticle : 0,
+    allArticle: 0,
 
   },
 
@@ -178,8 +178,8 @@ Page({
   //点击文章详情
   clickToReadText: function(e) {
     var that = this;
+
     //活动的情况
-   
     if (that.data.aid != null) {
       var id = e.currentTarget.dataset.id;
       wx.navigateTo({
@@ -277,7 +277,7 @@ Page({
             aList: list,
             more: null,
             cPage: c,
-            allArticle :res.data.count,
+            allArticle: res.data.count,
           });
         } else {
           that.setData({
@@ -326,7 +326,7 @@ Page({
             aList: list,
             more: null,
             cPage: c,
-            
+
           });
         } else {
           that.setData({
@@ -425,7 +425,7 @@ Page({
       switch (sType) {
         case '0':
           tTitle = options.name;
-          
+
           that.setData({
             tId: options.id,
             tPath: options.path,
@@ -451,7 +451,7 @@ Page({
         title: tTitle
       });
       wx.setNavigationBarTitle({
-        title : tTitle
+        title: tTitle
       });
     }
 

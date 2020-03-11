@@ -56,7 +56,7 @@
     <view class='category-name'>{{title}}</view>
   </view>
 
-  <text class="all-item" wx:if="{{searchType == 0}}" decode="true">|&nbsp;&nbsp;共{{allArticle}}篇文章</text>
+ 
 
 
   <!--搜索结果  -->
@@ -74,9 +74,6 @@
       <view class='article'>
         <view class='article-title'>{{item.titleName}}</view>
         <view class='article-author'>{{item.author}}</view>
-      </view>
-      <view class='container-number' wx:if="{{searchType != 2}}">
-        <text class='number' style="background-color:#6292FF;color:white" decode='true'>></text>
       </view>
     </view>
   </block>

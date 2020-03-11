@@ -11,7 +11,7 @@ Page({
     title: '我要阅读',
 
     //文章类型
-    tList: null,
+    tList: [],
 
     //文章类型根地址
     tPath: appData.urlPath + '/upload/articles/type/',
@@ -19,9 +19,8 @@ Page({
     //朗读活动id
     aid: null,
 
- 
-
- 
+    //文章封面根地址
+    cPath: appData.urlPath + '/upload/articles/',
 
 
 
@@ -47,39 +46,57 @@ Page({
         id: that.data.aid,
       },
       success: function(res) {
-        console.log(res);
+        console.log(res.data);
+        if (res.data.code != 0) {
+          return;
+        }
         that.setData({
           tList: res.data.data
         });
 
-        //如果只是只有一个类就直接去到文章界面
-        if(that.data.tList.length == 1){
-          var tData = that.data.tList;
-          var id = tData[0].typeId;
-          var name = tData[0].typeName;
-          var path = tData[0].img;
-          if (path != null) {
-            wx.navigateTo({
-              url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-                '&name=' + name +
-                '&path=' + that.data.tPath + path +
-                '&aid=' + that.data.aid,
-            });
-          } else {
-            wx.navigateTo({
-              url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-                '&name=' + name +
-                '&path=/images/icon/icon_default_type.png' +
-                '&aid=' + that.data.aid,
-            });
-          }
-          
+        var tData = that.data.tList;
+        //获取图书信息
+        for (var i = 0; i < tData.length; i++) {
+          var aList = [];
+          tData[i].aList = aList;
+          that.setData({
+            tList: tData
+          });
+          that.getAlist(i);
         }
-
 
       },
     });
   },
+
+
+
+  //根据分类获取文章
+  getAlist: function(i) {
+    var that = this;
+    var tData = that.data.tList;
+    
+    wx.request({
+      url: appData.urlPath + '/sys/activity-main/' + that.data.aid + '/article',
+      data: {
+        token: appData.token,
+        page: 1,
+        limit: 999,
+        articleTypeId: tData[i].typeId,
+      },
+      success: function(res) {
+        console.log(res.data);
+        var aData = res.data.data;
+        tData[i].aList = aData;
+        that.setData({
+          tList: tData,
+        });
+
+      },
+    });
+  },
+
+
 
 
   //活动自由朗读
@@ -99,38 +116,44 @@ Page({
     var name = e.currentTarget.dataset.name;
     var path = e.currentTarget.dataset.path;
 
+    // if (path != null) {
+    //   wx.navigateTo({
+    //     url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
+    //       '&name=' + name +
+    //       '&path=' + this.data.tPath + path +
+    //       '&aid=' + that.data.aid,
+    //   });
 
-    if (path != null) {
+    // } else {
+    //   wx.navigateTo({
+    //     url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
+    //       '&name=' + name +
+    //       '&path=/images/icon/icon_default_type.png' +
+    //       '&aid=' + that.data.aid,
+    //   });
+    // }
 
-      wx.navigateTo({
-        url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-          '&name=' + name +
-          '&path=' + this.data.tPath + path +
-          '&aid=' + that.data.aid,
-      });
+  },
 
 
 
-    } else {
-
-      wx.navigateTo({
-        url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-          '&name=' + name +
-          '&path=/images/icon/icon_default_type.png' +
-          '&aid=' + that.data.aid,
-      });
-
-    }
+  //点击其中文章
+  clickArticleItem : function(e){
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../../read/readArticle/readArticle?id=' + id +
+        '&aid=' + that.data.aid,
+    });
 
   },
 
 
 
 
- 
 
 
-  
+
 
 
 
@@ -143,7 +166,7 @@ Page({
       aid: options.aid,
     });
     this.getTList();
-    //this.getPersonalRecord();
+
 
   },
 

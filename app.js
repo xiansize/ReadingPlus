@@ -53,7 +53,6 @@ App({
 
   globalData: {
     //访问地址
-    //urlPath: 'http://192.168.10.1:8087/Reading',
     urlPath: 'https://cloud.dataesb.com/Reading',
 
     //用户信息

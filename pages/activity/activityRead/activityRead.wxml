@@ -11,8 +11,8 @@
     <view class="container-activity-lib" catchtap="btnFollowSub" wx:if="{{libName != null}}">
       <image class="icon-lib" wx:if="{{libIcon != null}}" src="{{libIconPath}}{{libIcon}}"></image>
       <view class="lib-name">{{libName}}</view>
-      <view class="follow-sub">关注公众号</view>
-      <image class="icon-follow" src="/images/icon/icon_arrow.png"></image>
+      <view class="follow-sub" wx:if="{{libUrl != null}}">关注公众号</view>
+      <image class="icon-follow" wx:if="{{libUrl != null}}" src="/images/icon/icon_arrow.png"></image>
     </view>
     <view class='activity-title'>{{aTitle}}</view>
     <view class='container-msg'>
@@ -30,7 +30,7 @@
     </view>
 
     <text class='detail {{detailMore == "展开详情>>" ? "detail-show" : "detail-hidden" }}' decode='true'>{{detail}}</text>
-  
+
     <view class="container-show-more">
       <text class="detail-more" catchtap="btnShowDetailMore" decode="true">{{detailMore}}</text>
     </view>
@@ -41,7 +41,7 @@
 
 
   <view class='search'>
-    <view class='container-search' >
+    <view class='container-search'>
       <image class='icon-search' src='/images/icon/icon_search.png'></image>
       <input class='search-input' maxlength='15' value='{{sTitle}}' placeholder='搜索音频' confirm-type='search' bindconfirm='toSearch' focus='{{focus}}'></input>
     </view>
@@ -58,16 +58,16 @@
     <block wx:for="{{mList}}" wx:key="key">
       <view class='container-search-item container-search-item-shelf' data-rid='{{item.opusId}}' catchtap='btnReaderShare'>
         <image class="icon-shelf" src="/images/icon/icon_index.png"></image>
-       <!-- <block wx:if="{{item.readerWeChatprofilePhoto != null}}">
+        <!-- <block wx:if="{{item.readerWeChatprofilePhoto != null}}">
           <image class='container-article-cover' src='{{item.readerWeChatprofilePhoto}}'></image>
         </block>
         <block wx:else>
           <image class='container-article-cover' src='/images/background/bg_view.png'></image>
         </block> -->
         <view class='container-article-cover'>
-         <open-data type="userAvatarUrl" ></open-data>
+          <open-data type="userAvatarUrl"></open-data>
         </view>
-        
+
         <view class='container-article'>
           <view class='container-article-author'>本人朗读</view>
           <view class='container-article-title'>{{item.titleName == null ? '自由朗读': item.titleName}}</view>
@@ -100,10 +100,17 @@
           <view class='container-article-title'>{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
 
         </view>
-        <view class='container-collect' catchtap='toLike' data-rid='{{item.opusId}}' data-id='{{index}}'>
-          <image class='icon-collect' src='{{item.iconLike}}'></image>
-          <view class='collect-number'>{{item.pollCount}}</view>
+        <view class='container-collect-num' catchtap='toLike' data-rid='{{item.opusId}}' data-id='{{index}}'>
+          <text class="collect-more" style="color:{{item.collectMoreColor}}" >X{{item.collectMore}}</text>
+          <view class="container-collect">
+            
+            <image class='icon-collect' src='{{item.iconLike}}'></image>
+            <view class='collect-number' style="color:{{item.textColor}}">{{item.pollCount}}</view>
+
+          </view>
+
         </view>
+
       </view>
     </block>
 
