@@ -7,8 +7,7 @@ Page({
    */
   data: {
 
-    //title
-    title: '我要阅读',
+  
 
     //文章类型
     tList: [],
@@ -109,31 +108,7 @@ Page({
 
 
 
-  //点击其中分类
-  clickCategoryItem: function(e) {
-    var that = this
-    var id = e.currentTarget.dataset.tid;
-    var name = e.currentTarget.dataset.name;
-    var path = e.currentTarget.dataset.path;
-
-    // if (path != null) {
-    //   wx.navigateTo({
-    //     url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-    //       '&name=' + name +
-    //       '&path=' + this.data.tPath + path +
-    //       '&aid=' + that.data.aid,
-    //   });
-
-    // } else {
-    //   wx.navigateTo({
-    //     url: '../../article/articleSearch/articleSearch?type=0&id=' + id +
-    //       '&name=' + name +
-    //       '&path=/images/icon/icon_default_type.png' +
-    //       '&aid=' + that.data.aid,
-    //   });
-    // }
-
-  },
+  
 
 
 
@@ -170,33 +145,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
+  
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -210,6 +159,23 @@ Page({
    */
   onReachBottom: function() {
 
+  },
+
+
+  //分享转发
+  onShareAppMessage: function (res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function (res) {
+
+      },
+      fail: function (res) {
+
+      },
+    }
   },
 
 

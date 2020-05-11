@@ -1,14 +1,16 @@
-<!-- <import src="../../../template/titlebar/titlebar.wxml" />
-<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
-<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
 
 <view class='wrap'>
 
-  <text class="read-free" catchtap="toFreeRead" decode="true">自由朗读&nbsp;&gt;&gt;</text>
+
+  <view class="read-free" catchtap="toFreeRead">
+    <text class='text-read-free'>自由朗读</text>
+    <image class='icon-read-free' src='/images/icon/icon_double_arrow_right.png'></image>
+  </view>
 
 
   <block wx:for="{{tList}}" wx:key="key" wx:for-item="item" wx:for-index="idx">
-    <view class='container-category-item' catchtap='clickCategoryItem' data-tid="{{item.typeId}}" data-name="{{item.typeName}}" data-path="{{item.img}}" style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}">
+    <view class='container-category-item'  style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}">
       <block wx:if="{{item.img}}">
         <image class='category-cover' src='{{tPath}}{{item.img}}'></image>
       </block>
@@ -18,7 +20,11 @@
       <view class='category-title'>{{item.typeName}}</view>
     </view>
 
-    <text class="all-item" decode="true" wx:if="{{item.aList}}">|&nbsp;&nbsp;共{{item.aList.length}}篇文章</text>
+    <view class='container-all-item'>
+      <view class='icon-all-item' style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}"></view>
+      <view class="all-item"  wx:if="{{item.aList}}">共{{item.aList.length}}篇文章</view>
+    </view>
+
     <block wx:for="{{item.aList}}" wx:key="aKey" wx:for-item="aItem">
       <view class='container-article' catchtap='clickArticleItem' data-id="{{aItem.id}}">
         <block wx:if="{{aItem.img != null}}">
@@ -32,16 +38,13 @@
           <text class='article-title'>{{aItem.titleName}}</text>
           <text class='article-author'>{{aItem.author}}</text>
         </view>
-        <text class='to-read' decode='true' style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}">&gt;</text>
+        <view class='to-read' style="background-color:{{idx%3 == 1 ? '#F9A184' : idx%3 == 2 ? '#A1C984' : '#64ACFC'}}">
+          <image class='icon-to-read' src='/images/icon/icon_read_right.png'></image>
+        </view>
       </view>
 
     </block>
 
-
-
   </block>
-
-
-
 
 </view>

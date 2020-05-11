@@ -8,9 +8,6 @@ Page({
    */
   data: {
 
-    //title
-    title: '活动',
-
 
 
     //活动搜索
@@ -42,8 +39,8 @@ Page({
     //焦点
     focus: false,
 
-    
-  
+
+
 
   },
 
@@ -58,7 +55,7 @@ Page({
       page: that.data.cPage,
       limit: 10,
     };
-    
+
     wx.request({
       url: appData.urlPath + '/sys/activity-main',
       data: rData,
@@ -80,10 +77,10 @@ Page({
           var list = that.data.aList;
           //添加进去
           for (var i = 0; i < total.length; i++) {
-            if(new Date() < total[i].endTime){
+            if (new Date() < total[i].endTime) {
               list.push(total[i]);
             }
-            
+
           };
 
           //分页加1
@@ -196,7 +193,7 @@ Page({
   },
 
 
- 
+
 
 
 
@@ -252,7 +249,7 @@ Page({
 
   },
 
-  
+
 
 
 
@@ -272,12 +269,28 @@ Page({
     //获取列表数据
     if (this.data.sTitle != null) {
       this.searchList();
-
     } else {
       this.getAList();
     }
 
+  },
 
+
+
+  //分享转发
+  onShareAppMessage: function(res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function(res) {
+
+      },
+      fail: function(res) {
+
+      },
+    }
   },
 
 

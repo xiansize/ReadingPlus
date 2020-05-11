@@ -53,13 +53,13 @@ Page({
     var path = app.globalData.urlPath;
     wx.login({
       success: function(res) {
-        console.log(res);
+        //console.log(res);
         //2,获取token
         wx.request({
           url: path + '/sys/wechat/login',
           data: {
-            appid: 'wxd693763b0943bfad',
-            secret: 'a0dee35d93a9c7e613581448231b8bb6',
+            appid: app.globalData.appid,
+            secret: app.globalData.secret,
             js_code: res.code,
             grant_type: 'authorization_code',
             libId: app.globalData.libCode,
@@ -69,9 +69,11 @@ Page({
             "Content-Type": "application/x-www-form-urlencoded"
           },
           success: function(res) {
-            console.log(res);
+            //console.log(res);
 
             if (res.data.code == 0) {
+
+              console.log(res.data.data.token);
 
               //保存token 和 openId
               app.globalData.token = res.data.data.token;
@@ -81,9 +83,10 @@ Page({
 
             } else {
 
+              var msg = res.data.code + res.data.msg;
               wx.showToast({
                 icon: 'none',
-                title: res.data.msg,
+                title: msg,
               });
             }
           },

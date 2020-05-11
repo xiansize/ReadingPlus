@@ -7,8 +7,6 @@ Page({
    */
   data: {
 
-    //title
-    title: '美文',
 
     //美文类型
     tList: null,
@@ -33,7 +31,7 @@ Page({
 
 
   //童心成长营显示活动热门作品
-  showHotArtist: function () {
+  showHotArtist: function() {
     if (appData.libCode == 'P1ZJ0571017') {
       this.setData({
         isTXCZY: true,
@@ -131,7 +129,7 @@ Page({
         limit: 9,
       },
       success: function(res) {
-        console.log(res.data);
+        //console.log(res.data);
         that.setData({
           tList: res.data.data
         });
@@ -162,7 +160,7 @@ Page({
         orderBie: no,
       },
       success: function(res) {
-        console.log(res.data);
+        //console.log(res.data);
         that.setData({
           aList: res.data.data
         });
@@ -173,22 +171,10 @@ Page({
 
 
 
-
-
-
-
-
-
-
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
-
-
-
 
   },
 
@@ -210,34 +196,27 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
 
+  
+
+
+
+  //分享转发
+  onShareAppMessage: function(res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function (res) {
+
+      },
+      fail: function (res) {
+
+      },
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-    console.log("下拉");
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
 
 
 })

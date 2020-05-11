@@ -206,14 +206,7 @@ Page({
 
 
 
-  //点击查看其他读者
-  btnOtherReader: function(e) {
-    // var that = this;
-    // var rid = e.currentTarget.dataset.rid;
-    // wx.navigateTo({
-    //   url: '../../activity/activtyShare/activityShare?rid='+rid,
-    // });
-  },
+  
 
 
   //获取token
@@ -228,8 +221,8 @@ Page({
         wx.request({
           url: path + '/sys/wechat/login',
           data: {
-            appid: 'wxd693763b0943bfad',
-            secret: 'a0dee35d93a9c7e613581448231b8bb6',
+            appid: appData.appid,
+            secret: appData.secret,
             js_code: res.code,
             grant_type: 'authorization_code',
             libId: appData.libCode,
@@ -522,13 +515,11 @@ Page({
    */
   onShareAppMessage: function(res) {
     var that = this;
-    //获取馆代码
     var lid = appData.libCode;
     return {
-      title: that.data.aTitle,
-      path: 'pages/activity/activtyShare/activityShare?code=' + lid +
-        '&rid=' + that.data.rid,
-      //imageUrl: that.data.cover, //用户分享出去的自定义图片大小为5:4,
+      title: '您的好友向您发送了活动邀请，快来看看吧',
+      path: 'pages/activity/activtyShare/activityShare?code=' + lid +'&rid=' + that.data.rid,
+      imageUrl: '/images/background/bg_share.png', 
       success: function(res) {
 
       },

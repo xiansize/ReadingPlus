@@ -14,11 +14,7 @@
     "pages/activity/activityWant/activityWant",
     "pages/activity/activtyShare/activityShare",
     "pages/activity/activityArtist/activityArtist",
-    "pages/activity/activityLib/activityLib",
-    "pages/eBook/eBookCategory",
-    "pages/eBook/eBookSearch/eBookSearch",
-    "pages/eBook/eBookListen/eBookListen",
-    "pages/eBook/eBookRead/eBookRead"
+    "pages/activity/activityLib/activityLib"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,4 +1,4 @@
-@import "../../../template/titlebar/titlebar.wxss";
+
 
 page {
   background: #fff;
@@ -32,7 +32,7 @@ page {
 
 .cover {
   width: 100%;
-  height: 390rpx;
+  height: 452rpx;
 }
 
 .middle {
@@ -48,7 +48,7 @@ page {
 .container-activity-lib {
   width: 92%;
   height: 124rpx;
-  border-bottom: solid #f0f0f0 1rpx;
+  border-bottom: solid #EEEEEE 1rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -76,7 +76,8 @@ page {
   color: #999;
   height: 124rpx;
   line-height: 124rpx;
-  margin-right: 24rpx;
+  margin-right: 14rpx;
+  overflow: hidden;
 }
 
 .icon-follow {
@@ -134,16 +135,20 @@ page {
   margin-bottom: 90rpx;
 }
 
+
+
+
 .detail {
   width: 92%;
   letter-spacing: 2rpx;
   font-size: 30rpx;
-  color: #666;
+  color: #333333;
   background: #fff;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
+  
 }
 
 .detail-show {
@@ -154,7 +159,7 @@ page {
   -webkit-line-clamp: 50;
 }
 
-.container-show-more {
+.container-expand{
   width: 92%;
   display: flex;
   flex-direction: row;
@@ -169,8 +174,10 @@ page {
 .detail-more {
   color: #6292ff;
   font-size: 28rpx;
-  margin-right: 6rpx;
+  margin-right: 8rpx;
 }
+
+
 
 .search {
   width: 100%;
@@ -321,7 +328,7 @@ page {
 .collect-number {
   width: auto;
   font-size: 30rpx;
-  color: #aaa;
+  color: #C5C5C5;
 }
 
 .collect-more {

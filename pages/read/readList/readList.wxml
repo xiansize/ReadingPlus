@@ -1,6 +1,4 @@
-<!-- <import src="../../../template/titlebar/titlebar.wxml" />
-<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
-<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
 
 <view class='wrap'>
 

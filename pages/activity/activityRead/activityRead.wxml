@@ -1,38 +1,37 @@
-<!-- <import src="../../../template/titlebar/titlebar.wxml" />
-<template is="titleBar" data="{{thisTitle : title ,thisPress : backpress}}" />
-<image class='backpress' src='/images/icon/icon_backpress.png' catchtap='backpress'></image> -->
+
 
 <image class='read' src='/images/logo/logo_read.png' catchtap='wantToRead' wx:if="{{during}}"></image>
 
+
 <view class='wrap'>
-  <image class='cover' src='{{cover}}'></image>
+  <image class='cover' wx:if="{{cover != null}}" src='{{aPath}}{{cover}}'></image>
 
   <view class='middle'>
-    <view class="container-activity-lib" catchtap="btnFollowSub" wx:if="{{libName != null}}">
+    <view class="container-activity-lib" wx:if="{{libName != null}}">
       <image class="icon-lib" wx:if="{{libIcon != null}}" src="{{libIconPath}}{{libIcon}}"></image>
       <view class="lib-name">{{libName}}</view>
-      <view class="follow-sub" wx:if="{{libUrl != null}}">关注公众号</view>
+      <view class="follow-sub" wx:if="{{libUrl != null}}" catchtap="btnFollowSub">关注公众号</view>
       <image class="icon-follow" wx:if="{{libUrl != null}}" src="/images/icon/icon_arrow.png"></image>
     </view>
     <view class='activity-title'>{{aTitle}}</view>
     <view class='container-msg'>
-      <image class='activity-icon' src='/images/icon/icon_all_record.png'></image>
+      <image class='activity-icon' src='/images/icon/icon_activity_record_all.png'></image>
       <view class='activity-msg'>参与作品：{{numbers}}</view>
     </view>
     <view class='container-msg'>
-      <image class='activity-icon' src='/images/icon/icon_like.png'></image>
+      <image class='activity-icon' src='/images/icon/icon_activity_like_count.png'></image>
       <view class='activity-msg'>获赞数量：{{likes}}</view>
     </view>
     <view class='container-msg'>
-      <image class='activity-icon' src='/images/icon/icon_activity_time.png'></image>
+      <image class='activity-icon' src='/images/icon/icon_activity_detail_time.png'></image>
       <view class='activity-msg'>{{date}}</view>
       <view class='activity-timeup' wx:if="{{timeup}}">活动已结束</view>
     </view>
+    <text class='detail {{detailMore == "展开详情" ? "detail-show" : "detail-hidden" }}' decode='true'>{{detail}}</text>
 
-    <text class='detail {{detailMore == "展开详情>>" ? "detail-show" : "detail-hidden" }}' decode='true'>{{detail}}</text>
-
-    <view class="container-show-more">
+    <view class='container-expand'>
       <text class="detail-more" catchtap="btnShowDetailMore" decode="true">{{detailMore}}</text>
+      <image class='icon-show-more' src='{{iconDetailMore}}'></image>
     </view>
 
 
@@ -74,7 +73,7 @@
 
         </view>
         <view class='container-collect'>
-          <image class='icon-collect' src='/images/icon/icon_collect_grey.png'></image>
+          <image class='icon-collect' src='/images/icon/icon_activity_record_item_like.png'></image>
           <view class='collect-number'>{{item.pollCount}}</view>
         </view>
       </view>
@@ -96,14 +95,14 @@
         </block>
 
         <view class='container-article' catchtap='btnReaderShare' data-rid='{{item.opusId}}' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>
-          <view class='container-article-author'>{{item.readerWeChatName}} 朗读</view>
+          <view class='container-article-author'>{{item.readerWeChatName}}</view>
           <view class='container-article-title'>{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
 
         </view>
         <view class='container-collect-num' catchtap='toLike' data-rid='{{item.opusId}}' data-id='{{index}}'>
-          <text class="collect-more" style="color:{{item.collectMoreColor}}" >X{{item.collectMore}}</text>
+          <text class="collect-more" style="color:{{item.collectMoreColor}}">X{{item.collectMore}}</text>
           <view class="container-collect">
-            
+
             <image class='icon-collect' src='{{item.iconLike}}'></image>
             <view class='collect-number' style="color:{{item.textColor}}">{{item.pollCount}}</view>
 

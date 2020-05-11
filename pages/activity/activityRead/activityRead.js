@@ -7,8 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    //title
-    title: '活动详情',
+
 
     //活动海报
     cover: null,
@@ -67,7 +66,8 @@ Page({
 
 
     //展开
-    detailMore: "展开详情>>",
+    detailMore: '展开详情',
+    iconDetailMore: '/images/icon/icon_arrow_right.png',
 
 
     //图书馆,名称头像,文章关注链接
@@ -107,13 +107,15 @@ Page({
   //展开/收起
   btnShowDetailMore: function() {
     var that = this;
-    if (that.data.detailMore == '展开详情>>') {
+    if (that.data.detailMore == '展开详情') {
       that.setData({
-        detailMore: "收起详情<<",
+        detailMore: "收起详情",
+        iconDetailMore: '/images/icon/icon_arrow_left.png',
       });
     } else {
       that.setData({
-        detailMore: "展开详情>>",
+        detailMore: "展开详情",
+        iconDetailMore: '/images/icon/icon_arrow_right.png',
       });
     }
   },
@@ -236,8 +238,8 @@ Page({
           var list = that.data.rList;
           //添加进去
           for (var i = 0; i < total.length; i++) {
-            total[i].iconLike = '/images/icon/icon_collect_grey.png';
-            total[i].textColor = '#AAAAAA';
+            total[i].iconLike = '/images/icon/icon_activity_record_item_like.png';
+            total[i].textColor = '#C5C5C5';
             total[i].collectMore = 0;
             total[i].collectMoreColor = '#FFFFFF';
             list.push(total[i]);
@@ -370,14 +372,14 @@ Page({
             });
           }, 220);
 
-          setTimeout(function () {
+          setTimeout(function() {
             list[index].collectMoreColor = '#FFFFFF';
             that.setData({
               rList: list
             });
           }, 500);
 
-          
+
 
         } else {
           wx.showToast({
@@ -510,6 +512,7 @@ Page({
             date: time,
             detail: res.data.data.synopsis,
             likes: res.data.data.pollCount,
+            cover: res.data.data.img,
 
           });
 
@@ -584,62 +587,101 @@ Page({
 
 
 
+  //获取token
+  getToken: function() {
+    var that = this;
+    //1,获取openId
+    var path = appData.urlPath;
+    wx.login({
+      success: function (res) {
+        console.log(res);
+        //2,获取token
+        wx.request({
+          url: path + '/sys/wechat/login',
+          data: {
+            appid: appData.appid,
+            secret: appData.secret,
+            js_code: res.code,
+            grant_type: 'authorization_code',
+            libId: appData.libCode,
+          },
+          method: "POST",
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success: function (res) {
+            console.log(res);
+            if (res.data.code == 0) {
+              //保存token 和 openId
+              appData.token = res.data.data.token;
+
+              that.getDetail();
+              that.getRList();
+              that.getPersonalRecord();
+
+            } else {
+              
+              var msg = res.data.code + res.data.msg;
+              wx.showToast({
+                icon: 'none',
+                title: msg,
+              });
+            }
+          },
+          fail: function () {
+            wx.showToast({
+              icon: 'none',
+              title: '连接服务器失败',
+            })
+          },
+        });
+      }
+    })
+
+  },
+
+
+
 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var aid = options.aid;
-    var img = this.data.aPath + options.img;
     this.setData({
-      cover: img,
-      aid: aid,
+      aid: options.aid,
     });
+    var code = options.code;
+    if (code != null) {
+      //全局馆代码
+      getApp().globalData.libCode = code;
+      //缓存
+      wx.setStorageSync('code', code);
+      //先登录获取token
+      this.getToken();
 
-    this.getDetail();
-    this.getRList();
+
+    } else {
+      this.getDetail();
+      this.getRList();
+      this.getPersonalRecord();
+    }
+
 
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getPersonalRecord();
 
 
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
 
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
 
   /**
    * 页面上拉触底事件的处理函数
@@ -662,6 +704,24 @@ Page({
   onPullDownRefresh: function() {
     this.toGetAllRecord();
 
+  },
+
+
+  //转发分享
+  onShareAppMessage: function(res) {
+    var that = this;
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '您的好友向您发送了活动邀请，快来看看吧',
+      path: 'pages/activity/activityRead/activityRead?code=' + lid + '&aid=' + that.data.aid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function(res) {
+
+      },
+      fail: function(res) {
+
+      },
+    }
   },
 
 

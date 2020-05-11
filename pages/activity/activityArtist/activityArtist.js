@@ -115,4 +115,21 @@ Page({
   },
 
 
+  //分享转发
+  onShareAppMessage: function (res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function (res) {
+
+      },
+      fail: function (res) {
+
+      },
+    }
+  },
+
+
 })

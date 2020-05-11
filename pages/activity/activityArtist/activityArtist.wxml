@@ -1,15 +1,43 @@
-<block wx:for="{{aList}}" wx:key="key" >
-  <view class='container-search-item' catchtap='toListen' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>
-    <block wx:if="{{item.articleImg != null}}">
-      <image class='container-article-cover' src='{{articlePath}}{{item.articleImg}}'></image>
-    </block>
-    <block wx:else>
-      <image class='container-article-cover' src='/images/background/bg_view.png'></image>
-    </block>
+<view class='top'>
+  <image class='top-bg' src='/images/icon/icon_champion.png'></image>
+  <text class='top-title'>活动作品榜</text>
+  <text class='top-slogan'>用悦耳的朗读声争取NO.1宝座吧！</text>
+
+</view>
+
+<block wx:for="{{aList}}" wx:key="key">
+  <view class='container-item' catchtap='toListen' data-aid='{{item.articleId}}' data-path='{{item.opusPath}}' data-reader='{{item.readerWeChatName}}'>
+    <view class='ranking'>
+      <block wx:if='{{index == 0 || index == 1 || index == 2}}'>
+        <image class='ranking-icon' src="/images/icon/icon_hot_{{index+1}}.png"></image>
+      </block>
+      <block wx:else>
+        <block wx:if='{{index<9}}'>
+          <text class='ranking-num'>0{{index + 1}}</text>
+        </block>
+        <block wx:else>
+          <text class='ranking-num'>{{index + 1}}</text>
+        </block>
+      </block>
+    </view>
+
+    <view class='container-cover'>
+      <block wx:if="{{item.readerWeChatImg != null}}">
+        <image class='avatar-cover' src='{{item.readerWeChatImg}}'></image>
+      </block>
+      <block wx:else>
+        <image class='avatar-cover' src='/images/background/bg_view.png'></image>
+      </block>
+      <view class='container-like'>
+        <image class='icon-like' src='/images/icon/icon_activity_ranking_like.png'></image>
+        <view class='like'>{{item.opusPollCount}}</view>
+      </view>
+    </view>
 
     <view class='container-article'>
-      <view class='container-article-title' >{{item.titleName != null ? item.titleName : '自由朗读'}}</view>
-      <view class='container-article-author'>{{item.readerWeChatName}} 朗读</view>
+      <view class='reader'>{{item.readerWeChatName}}</view>
+      <view class='lib'>参与馆：{{item.otherLibName}}</view>
+      <view class='activity'>{{item.activityName}}</view>
     </view>
   </view>
 </block>

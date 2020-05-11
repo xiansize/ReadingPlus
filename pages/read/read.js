@@ -6,11 +6,6 @@ Page({
    */
   data: {
 
-    //title
-    title: '朗读',
-
-    //适配苹果X
-    // model: 128,
 
     //排名
     rank: null,
@@ -119,18 +114,6 @@ Page({
   onLoad: function(options) {
 
 
-    // //适配苹果X
-    // if (appData.phoneModel == 'iPhone X') {
-    //   this.setData({
-    //     model: 178,
-    //   });
-    // }
-
-    
-
-
-
-
   },
 
   /**
@@ -179,6 +162,24 @@ Page({
    */
   onReachBottom: function() {
 
+  },
+
+
+
+  //分享转发
+  onShareAppMessage: function (res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function (res) {
+
+      },
+      fail: function (res) {
+
+      },
+    }
   },
 
 

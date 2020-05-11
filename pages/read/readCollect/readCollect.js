@@ -7,9 +7,7 @@ Page({
    */
   data: {
 
-    //title
-    title: '我的收藏',
-
+  
     //收藏列表
     cList: [],
 
@@ -218,26 +216,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
+  
 
   /**
    * 页面上拉触底事件的处理函数
@@ -245,6 +224,22 @@ Page({
   onReachBottom: function() {
     this.getCollectList();
 
+  },
+
+  //分享转发
+  onShareAppMessage: function (res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function (res) {
+
+      },
+      fail: function (res) {
+
+      },
+    }
   },
 
 

@@ -18,8 +18,7 @@ Page({
    */
   data: {
 
-    //title
-    title: '详情',
+  
 
     //文章信息
     aTitle: '',
@@ -384,7 +383,7 @@ Page({
     var oid = that.data.opusId;
     var collect = that.data.collect;
 
-    if(collect == 'IS'){
+    if (collect == 'IS') {
 
 
       wx.request({
@@ -394,7 +393,7 @@ Page({
           opuseId: oid,
         },
         method: 'DELETE',
-        success: function (res) {
+        success: function(res) {
 
           if (res.data.code == 0) {
             that.sToast('已取消收藏!');
@@ -407,7 +406,7 @@ Page({
 
 
 
-    }else{
+    } else {
 
       wx.request({
         url: appData.urlPath + '/sys/favories',
@@ -419,9 +418,9 @@ Page({
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        success: function (res) {
+        success: function(res) {
           console.log(res);
-         
+
           if (res.data.code == 0) {
             that.sToast('已收藏!');
 
@@ -436,7 +435,7 @@ Page({
 
     }
 
-   
+
   },
 
 
@@ -799,12 +798,12 @@ Page({
 
 
   //点击开始录制之前获取读者信息并提交
-  wechatInfo:function(){
-    if (app.globalData.userInfo == null){
+  wechatInfo: function() {
+    if (app.globalData.userInfo == null) {
       wx.navigateTo({
         url: '../../index/index?type=1',
       });
-    }else{
+    } else {
       this.startRecord();
     }
   },
@@ -902,7 +901,7 @@ Page({
         recordPath: res.tempFilePath,
 
       });
-     
+
     });
 
     //停止播放音乐
@@ -910,10 +909,10 @@ Page({
     innerAudioContext.onStop(() => {
       that.setData({
         playIcon: '/images/icon/icon_play.png',
-        playRecord : '00:00'
+        playRecord: '00:00'
       });
     });
-   
+
   },
 
 
@@ -971,16 +970,52 @@ Page({
 
 
 
-  //点击确认发布
+  //点击确认发布订阅消息
   confirmPublish: function() {
-    var that = this;
-    that.setData({
-      loading: '上传中..',
-      showDialog: false,
-    });
-    innerAudioContext.stop();
-    that.uploadRecord(1);
+    this.subscribeMessage();
+
   },
+
+
+  //订阅消息
+  subscribeMessage: function() {
+    var that = this;
+    //查看设置是否已经有订阅
+    wx.getSetting({
+      withSubscriptions: true,
+      success: function(res) {
+        console.log(res);
+        //弹窗订阅
+        wx.requestSubscribeMessage({
+          tmplIds: ['kzOoIZ5nDmlk03fCyZW2WxL_uh2gKh7CQu49mX7LLh8'],
+          success: function(res) {
+            console.log(res);
+            //订阅后上传音频
+            that.setData({
+              loading: '上传中..',
+              showDialog: false,
+            });
+            innerAudioContext.stop();
+            that.uploadRecord(1);
+
+          },
+          fail: function(res) {
+            console.log(res);
+            //订阅失败也上传音频
+            that.setData({
+              loading: '上传中..',
+              showDialog: false,
+            });
+            innerAudioContext.stop();
+            that.uploadRecord(1);
+          },
+        });
+
+      },
+    });
+
+  },
+
 
 
 
@@ -1025,7 +1060,7 @@ Page({
 
           if (that.data.aid != null) {
             if (that.data.freeRead) {
-              
+
               rData = {
                 token: app.globalData.token,
                 activityId: that.data.aid,
@@ -1033,7 +1068,7 @@ Page({
                 opusStart: pub == 0 ? 'NOT_AUDIT' : 'UNREVIEWED',
               }
             } else {
-              
+
               rData = {
                 token: app.globalData.token,
                 activityId: that.data.aid,
@@ -1099,6 +1134,8 @@ Page({
                     recordStatu: 0,
                   });
 
+
+
                 }
 
 
@@ -1122,6 +1159,9 @@ Page({
       },
     })
   },
+
+
+
 
 
 
@@ -1349,7 +1389,7 @@ Page({
 
     //是否收藏
     var collect = options.collect;
-   
+
     if (collect) {
       this.setData({
         collect: collect
@@ -1416,6 +1456,23 @@ Page({
     //停止播放
     innerAudioContext.stop();
 
+  },
+
+
+  //分享转发
+  onShareAppMessage: function(res) {
+    var lid = getApp().globalData.libCode;
+    return {
+      title: '朗读云陪你一起朗读',
+      path: 'pages/index/index?code=' + lid,
+      imageUrl: '/images/background/bg_share.png', 
+      success: function (res) {
+
+      },
+      fail: function (res) {
+
+      },
+    }
   },
 
 

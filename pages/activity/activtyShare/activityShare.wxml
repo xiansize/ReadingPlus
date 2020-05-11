@@ -42,7 +42,7 @@
   <view class='title-list'>活动排行榜</view>
 
   <block wx:for="{{rList}}" wx:key="key">
-    <view class='list-item' data-rid='{{item.opusId}}' catchtap='btnOtherReader'>
+    <view class='list-item' data-rid='{{item.opusId}}' >
       <block wx:if="{{item.readerWeChatprofilePhoto != null}}">
         <image class='list-item-icon' src='{{item.readerWeChatprofilePhoto}}'></image>
       </block>
