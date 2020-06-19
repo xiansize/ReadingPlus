@@ -408,7 +408,7 @@ Page({
       },
       success: function(res) {
         console.log(res);
-        if (res.data.data.phone) {
+        if (res.data.data.phone != null) {
           //有手机号码
           wx.navigateTo({
             url: '../activityWant/activityWant?aid=' + that.data.aid,
@@ -593,7 +593,7 @@ Page({
     //1,获取openId
     var path = appData.urlPath;
     wx.login({
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         //2,获取token
         wx.request({
@@ -609,18 +609,17 @@ Page({
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
-          success: function (res) {
+          success: function(res) {
             console.log(res);
             if (res.data.code == 0) {
               //保存token 和 openId
               appData.token = res.data.data.token;
 
-              that.getDetail();
-              that.getRList();
-              that.getPersonalRecord();
+              //获取微信用户信息
+              that.getUserInfoHttp(0);
 
             } else {
-              
+
               var msg = res.data.code + res.data.msg;
               wx.showToast({
                 icon: 'none',
@@ -628,7 +627,7 @@ Page({
               });
             }
           },
-          fail: function () {
+          fail: function() {
             wx.showToast({
               icon: 'none',
               title: '连接服务器失败',
@@ -639,6 +638,111 @@ Page({
     })
 
   },
+
+
+
+  //获取后台用户信息；
+  getUserInfoHttp: function(rid) {
+    var that = this;
+    wx.request({
+      url: appData.urlPath + '/sys/reader/' + rid + '/opus',
+      data: {
+        token: appData.token,
+        rdId: rid,
+        opusStart: 'RELEASE',
+        start: 2,
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.data.code == 0) {
+
+          if (appData.userInfo == null) {
+            var userInfo = {
+              nickName: res.data.data.name,
+              avatarUrl: res.data.data.profilePhoto,
+            };
+            appData.userInfo = userInfo;
+          }
+
+
+          that.getDetail();
+          that.getRList();
+          that.getPersonalRecord();
+
+
+        } else if (res.data.code == 2006 && res.data.msg == "权限不足:Subject does not have role [reader]") {
+          that.postUserInfo();
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '获取读者数据失败',
+          })
+        }
+
+
+      },
+    });
+  },
+
+
+  //授权获取用户信息
+  postUserInfo: function() {
+    var that = this;
+
+    wx.getSetting({
+      success: function(res) {
+        if (res.authSetting['scope.userInfo']) {
+          //用户已经授权
+          wx.getUserInfo({
+            success: function(res) {
+              getApp().globalData.userInfo = res.userInfo;
+              that.uploadReader();
+            }
+          });
+
+
+        } else {
+          //用户还没授权
+          wx.redirectTo({
+            url: '../../index/index?aid=' + that.data.aid,
+          });
+
+        }
+      }
+    });
+
+  },
+
+
+  //提交用户信息给服务器
+  uploadReader: function() {
+    var that = this;
+    var path = appData.urlPath;
+
+    wx.request({
+      url: path + '/sys/reader/wechat/small-program',
+      data: {
+        token: appData.token,
+        name: appData.userInfo.nickName,
+        profilePhoto: appData.userInfo.avatarUrl,
+
+      },
+      method: "POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {
+        console.log(res);
+        that.getDetail();
+        that.getRList();
+        that.getPersonalRecord();
+
+      },
+    });
+  },
+
+
+
 
 
 
@@ -662,9 +766,7 @@ Page({
 
 
     } else {
-      this.getDetail();
-      this.getRList();
-      this.getPersonalRecord();
+      this.getUserInfoHttp(0);
     }
 
 
@@ -676,8 +778,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
-
+    //设为活动朗读
+    getApp().globalData.readMode = 2;
 
   },
 
@@ -714,7 +816,7 @@ Page({
     return {
       title: '您的好友向您发送了活动邀请，快来看看吧',
       path: 'pages/activity/activityRead/activityRead?code=' + lid + '&aid=' + that.data.aid,
-      imageUrl: '/images/background/bg_share.png', 
+      imageUrl: '/images/background/bg_share.png',
       success: function(res) {
 
       },

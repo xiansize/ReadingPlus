@@ -8,6 +8,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+
+    aid:null,
   },
 
 
@@ -105,9 +107,19 @@ Page({
 
   //跳转到功能页面
   swithToFunction: function() {
-    wx.switchTab({
-      url: '../article/article',
-    });
+    var that = this;
+    if (that.data.aid){
+      wx.redirectTo({
+        url: '../activity/activityRead/activityRead?aid=' + that.data.aid,
+      });
+      
+    }else{
+      wx.switchTab({
+        url: '../article/article',
+      });
+    }
+
+    
   },
 
 
@@ -219,6 +231,13 @@ Page({
       } else {
         getApp().globalData.libCode = code;
       }
+    }
+
+    //从活动朗读页面进来授权
+    if(options.aid){
+      this.setData({
+        aid:options.aid,
+      });
     }
 
     this.getToken();

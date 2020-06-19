@@ -430,13 +430,19 @@ Page({
         console.log(res);
 
         //时间
-        var t = util.formatTimeMi(new Date(res.data.data.intime));
+        if (res.data.data.intime != null){
+          var t = util.formatTimeMi(new Date(res.data.data.intime));
+          that.setData({
+            fTime: t,
+          });
+        }
+        
 
         that.setData({
           avatar: res.data.data.profilePhoto,
           nickname: res.data.data.name,
           collect: res.data.data.opusCount,
-          fTime : t,
+          
         });
 
         //转换时间
